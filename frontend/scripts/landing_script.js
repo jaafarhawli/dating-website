@@ -1,3 +1,4 @@
+// jQuery: change Hero header opacity on scroll
 $(document).ready(function() {
 	$(window).scroll(function(event) {
 		let scroll = $(this).scrollTop();
@@ -8,6 +9,7 @@ $(document).ready(function() {
 	});
 });
 
+// Font Awesome: Reviews slider
 const slider = tns({
 	container: '.reviews',
 	slideBy: 1,
