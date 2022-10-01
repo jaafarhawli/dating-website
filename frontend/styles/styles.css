@@ -1,1 +1,51 @@
+/* Utilities  */
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex {
+	display: flex;
+}
+
+.button {
+	width: 130px;
+	height: 40px;
+	background: linear-gradient(#ff5f40, #e74974);
+	border-radius: 100px;
+	color: white;
+	font-size: 15px;
+	border: none;
+}
+
+/* Landing Page */
+
+.landing-navbar {
+	margin-top: 20px;
+	width: 100%;
+	justify-content: right;
+	align-items: center;
+	padding: 20px 40px;
+	background-color: #fff6f2;
+}
+
+.logo-container {
+	border-bottom-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+	width: 150px;
+	height: 150px;
+	background: linear-gradient(#ff5f40, #e74974);
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 40px;
+}
+
+.logo {
+	width: 80%;
+	object-fit: contain;
+}
