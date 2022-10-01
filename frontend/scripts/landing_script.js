@@ -7,3 +7,16 @@ $(document).ready(function() {
 		}
 	});
 });
+
+const slider = tns({
+	container: '.reviews',
+	slideBy: 1,
+	speed: 400,
+	nav: false,
+	mouseDrag: true,
+	controls: false,
+	autoplay: true,
+	autoplayButtonOutput: false,
+	autoplayTimeout: 3000,
+	items: 3
+});
