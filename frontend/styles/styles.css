@@ -29,6 +29,18 @@
 	font-weight: bold;
 }
 
+.padding {
+	padding: 0 40px;
+}
+
+.display {
+	display: none;
+}
+
+.shadow {
+	box-shadow: 0px 4px 15px 0px rgb(231, 73, 116, 0.4);
+}
+
 /* Landing Page */
 
 .landing-navbar {
@@ -59,7 +71,7 @@
 }
 
 .hero {
-	width: 100vw;
+	width: 100%;
 	height: 100vh;
 	background: linear-gradient(rgb(255, 95, 64, 0.2), rgb(231, 73, 116, 0.2)),
 		linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url(../images/wallpaperflare.com_wallpaper2.jpg);
@@ -84,4 +96,34 @@
 
 .create-account {
 	width: 200px;
+}
+
+.reviews {
+	padding: 40px;
+	background-color: #fff6f2;
+}
+
+.review-element-container {
+	/* border: solid 0.5px rgb(202, 202, 202); */
+	width: 30vw;
+	border-radius: 5px;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
+	height: 200px;
+	margin: 0 auto;
+	user-select: none;
+}
+
+.reviewers {
+	align-self: flex-start;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.review-content {
+	border-top: solid 3px rgb(231, 73, 116, 0.4);
+	font-size: 16px;
+	padding-top: 5px;
+	color: rgb(59, 59, 59);
 }
