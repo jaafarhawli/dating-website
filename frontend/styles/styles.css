@@ -11,25 +11,33 @@
 	display: flex;
 }
 
+.column {
+	flex-direction: column;
+}
+
 .button {
 	width: 130px;
 	height: 40px;
-	background: linear-gradient(#ff5f40, #e74974);
+	background: linear-gradient(to right, #ff5f40, #e74974);
 	border-radius: 100px;
 	color: white;
-	font-size: 15px;
+	font-size: 18px;
 	border: none;
+}
+
+.bold {
+	font-weight: bold;
 }
 
 /* Landing Page */
 
 .landing-navbar {
-	margin-top: 20px;
+	/* margin-top: 20px; */
 	width: 100%;
 	justify-content: right;
 	align-items: center;
 	padding: 20px 40px;
-	background-color: #fff6f2;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
 }
 
 .logo-container {
@@ -37,7 +45,7 @@
 	border-bottom-right-radius: 50%;
 	width: 150px;
 	height: 150px;
-	background: linear-gradient(#ff5f40, #e74974);
+	background: linear-gradient(to right, #ff5f40, #e74974);
 	justify-content: center;
 	align-items: center;
 	position: absolute;
@@ -48,4 +56,32 @@
 .logo {
 	width: 80%;
 	object-fit: contain;
+}
+
+.hero {
+	width: 100vw;
+	height: 100vh;
+	background: linear-gradient(rgb(255, 95, 64, 0.2), rgb(231, 73, 116, 0.2)),
+		linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url(../images/wallpaperflare.com_wallpaper2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* padding-top: 20px; */
+}
+
+.hero-content-container {
+	width: 100%;
+	height: 80%;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+}
+
+.hero-header {
+	font-size: 5rem;
+	color: white;
+	text-align: center;
+}
+
+.create-account {
+	width: 200px;
 }
