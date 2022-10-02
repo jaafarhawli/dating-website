@@ -8,51 +8,65 @@
     <title>Swipped | Dating, Make Friends & Meet New People</title>
 </head>
 <body>
-    <!-- Start Log in Section -->
+    <!-- Start Log in / Sign up Section -->
     <section class="login-section flex">
+        <!-- Main container -->
         <div class="login-container flex">
+            <!-- Banner -->
             <div class="login-banner flex">
-                <div class="footer-logo-container flex">
+                <!-- Logo Badge -->
+                <div class="login-logo-container flex">
                     <img src="./images/logo-removebg-preview.png" alt="logo" class="logo">
                 </div>
             </div>
+            <!-- Log in form container -->
             <div class="login-form-container flex">
+                <!-- Log in form -->
                 <form class="login-form flex column">
+                    <!-- Header -->
                     <h1>Welcome To Swipped</h1>
+                    <!-- Log in Email -->
                     <div class="login-email flex column">
                         <label for="">Email</label>
                         <input type="email" class="input">
                     </div>
-                    <!-- Sign in password -->
+                    <!-- Log in password -->
                     <div class="login-password flex column">
                         <label for="">Password</label>
                         <input type="password" class=" input">
                     </div>  
-                    <!-- Sign in button -->
+                    <!-- Log in button -->
                     <button class="login-page-button button" id="signinPageButton" type="button">login</button>
                     <p>New to Swipped? <span class="signup-link pointer">Signup</span></p>
                 </form>
             </div>
+            <!-- Sign up form container -->
             <div class="signup-form-container flex display">
+                <!-- Sign up form -->
                 <form class="signup-form flex column">
+                    <!-- Sign up header -->
                     <h1>Sign Up To Swipped</h1>
+                    <!-- Sign up username -->
                     <div class="signup-username flex column">
                         <label for="username">Username</label>
                         <input type="text" class="input" id="username">
                     </div>
+                    <!-- Sign up email -->
                     <div class="signup-email flex column">
                         <label for="email">Email</label>
                         <input type="email" class="input" id="email">
                     </div>
-                    <!-- Sign in password -->
+                    <!-- Sign up password -->
                     <div class="signup-password flex column">
                         <label for="password">Password</label>
                         <input type="password" class=" input" id="password">
                     </div>  
+                    <!-- Sign up location -->
                     <div class="signup-location flex column">
                         <label for="location">Location</label>
                         <input type="text" class="input" id="location">
                     </div>
+                    <!-- Sign up gender and prefered gender select -->
                     <div class="gender-select flex">
                         <div class="signup-gender flex column">
                             <label for="gender">Gender</label>
@@ -78,7 +92,7 @@
             </div>
         </div>
     </section>
-    <!-- End Log in Section -->
+    <!-- End Log in / Sign up Section -->
     <script src="./scripts/login_script.js"></script>
 </body>
 </html>

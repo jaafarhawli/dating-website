@@ -81,6 +81,7 @@
 }
 
 /* Logo badge */
+.login-logo-container,
 .footer-logo-container,
 .logo-container {
 	border-bottom-left-radius: 50%;
@@ -242,6 +243,7 @@
 
 /* Login Section */
 
+/* Log in background container */
 .login-section {
 	justify-content: center;
 	align-items: center;
@@ -253,11 +255,13 @@
 	background-repeat: no-repeat;
 }
 
+/* Log in container */
 .login-container {
 	width: 60%;
 	height: 70%;
 }
 
+/* Log in banner */
 .login-banner {
 	justify-content: center;
 	height: 100%;
@@ -268,6 +272,7 @@
 	background-repeat: no-repeat;
 }
 
+/* Log in / Sign up forms containers */
 .signup-form-container,
 .login-form-container {
 	height: 100%;
@@ -277,6 +282,7 @@
 	align-items: center;
 }
 
+/* Log in Sign up forms */
 .signup-form,
 .login-form {
 	align-items: center;
@@ -288,6 +294,7 @@
 	gap: 10px;
 }
 
+/* Forms inputs */
 .signup-location,
 .signup-username,
 .signup-email,
@@ -297,12 +304,14 @@
 	width: 100%;
 }
 
+/* Forms buttons */
 .signup-page-button,
 .login-page-button {
 	width: 100%;
 	margin-top: 20px;
 }
 
+/* Forms links */
 .login-link,
 .signup-link {
 	color: #e74974;
@@ -313,6 +322,7 @@
 	text-decoration: underline;
 }
 
+/* Gender select and prefered gender container */
 .gender-select {
 	width: 100%;
 	justify-content: space-between;
