@@ -71,6 +71,11 @@ ul {
 	list-style-type: none;
 }
 
+.current {
+	font-weight: bold;
+	color: #e74974;
+}
+
 /* Landing Page */
 
 /* Landing page navigation bar */

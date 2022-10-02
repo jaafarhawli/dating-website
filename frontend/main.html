@@ -17,14 +17,14 @@
     </div>
     <div class="main-navbar flex">
         <ul class="nav-elements flex pointer">
-            <li>Home</li>
-            <li>Favorites</li>
-            <li>Chat</li>
+            <li class="current" id="navHome">Home</li>
+            <li id="navLiked">Liked</li>
+            <li id="navChat">Chat</li>
         </ul>
-        <button class="login-button button bold" type="button">Account</button>
+        <button class="login-button button bold" type="button" id="accountButton">Account</button>
     </div>
     <!-- Start Hero Section -->
-    <section class="main-hero flex display">
+    <section class="main-hero flex" id="mainHero">
         <div class="hero-content-container-main flex column" id="heroHeader">
             <div class="flex">
                 <p class="main-hero-header"><span class="bold">Meet New</span> And Interesting<br>People Nearby</p>
@@ -35,7 +35,7 @@
     <!-- End Hero Section -->
 
     <!-- Start Community Section -->
-    <section class="community padding display">
+    <section class="community padding" id="community">
         <div class="community-header">
             <h1>Community</h1>
         </div>
@@ -121,12 +121,12 @@
     <!-- End Community Section -->
 
     <!-- Start Hero Liked Section -->
-    <section class="hero-liked">
+    <section class="hero-liked display" id="likedHero">
     </section>
     <!-- End Hero Liked Section -->
 
      <!-- Start Liked Section -->
-     <section class="community padding display">
+     <section class="community padding display" id="liked">
         <div class="community-header">
             <h1>Liked Users</h1>
         </div>
@@ -203,7 +203,7 @@
     <!-- End Liked Section -->
 
     <!-- Start Chat Section -->
-    <section class="section chat-page-body flex display">
+    <section class="section chat-page-body flex display" id="chat">
         <div class="chat-users">
             <span class="material-symbols-outlined display chat-hamburger pointer">
                 menu
@@ -270,7 +270,7 @@
     <!-- End Chat Section -->
 
     <!-- Start Account Section -->
-    <section class="section account-body padding">
+    <section class="section account-body padding display" id="account">
         <div class="settings-header">
             <h1>Account Settings</h1>
         </div>
@@ -326,7 +326,7 @@
     <!-- End Account Section -->
 
     <!-- Start Footer Section -->
-    <section class="footer-main display">
+    <section class="footer-main" id="footer">
         <div class="footer-logo flex">
             <div class="footer-logo-container flex">
                 <img src="./images/logo-removebg-preview.png" alt="logo" class="logo">
@@ -357,7 +357,7 @@
 		    <div class="user-details">
 		    	<p class="user-modal-name bold">Jaafar Hawli</p>
 		    	<p class="user-modal-gender">Male</p>
-		    	<p class="user-modal-location bold">Location: Beirut</p>
+		    	<p class="user-modal-location bold">Beirut</p>
 		    	<p class="user-modal-bio">Bio: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi officiis numquam eum eligendi, sapiente harum explicabo at sed enim perferendis, dolor aliquam eveniet voluptatum porro eius tempora maiores facere omnis?</p>
 		    </div>
         </div>
