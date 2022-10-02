@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <title>Swipped | Dating, Make Friends & Meet New People</title>
+</head>
+<body>
+    <!-- Start Log in / Sign up Section -->
+    <section class="login-section flex">
+        <!-- Main container -->
+        <div class="login-container flex">
+            <!-- Banner -->
+            <div class="login-banner flex">
+                <!-- Logo Badge -->
+                <div class="login-logo-container flex">
+                    <img src="./images/logo-removebg-preview.png" alt="logo" class="logo">
+                </div>
+            </div>
+            <!-- Sign up form container -->
+            <div class="signup-form-container flex" id="signupForm">
+                <!-- Sign up form -->
+                <form class="signup-form flex column">
+                    <!-- Sign up header -->
+                    <h1>Sign Up To Swipped</h1>
+                    <!-- Sign up username -->
+                    <div class="signup-username flex column">
+                        <label for="username">Username</label>
+                        <input type="text" class="input" id="username">
+                    </div>
+                    <!-- Sign up email -->
+                    <div class="signup-email flex column">
+                        <label for="email">Email</label>
+                        <input type="email" class="input" id="email">
+                    </div>
+                    <!-- Sign up password -->
+                    <div class="signup-password flex column">
+                        <label for="password">Password</label>
+                        <input type="password" class=" input" id="password">
+                    </div>  
+                    <!-- Sign up location -->
+                    <div class="signup-location flex column">
+                        <label for="location">Location</label>
+                        <input type="text" class="input" id="location">
+                    </div>
+                    <!-- Sign up gender and prefered gender select -->
+                    <div class="gender-select flex">
+                        <div class="signup-gender flex column">
+                            <label for="gender">Gender</label>
+                            <select class="input" id="gender">
+                                <option value="" disabled="true" selected="true"></option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="signup-prefered-gender flex column">
+                            <label for="preferedGender">Prefered Gender</label>
+                            <select class="input" id="preferedGender">
+                                <option value="" disabled="true" selected="true"></option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Sign up button -->
+                    <button class="signup-page-button button" id="signinPageButton" type="button">Sign Up</button>
+                    <p>Already have an account? <span class="login-link pointer" id="login">Login</span></p>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- End Log in / Sign up Section -->
+    <script src="./scripts/signup_script.js"></script>
+</body>
+</html>

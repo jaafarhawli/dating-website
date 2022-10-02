@@ -20,7 +20,7 @@
                 </div>
             </div>
             <!-- Log in form container -->
-            <div class="login-form-container flex">
+            <div class="login-form-container flex" id="loginForm">
                 <!-- Log in form -->
                 <form class="login-form flex column">
                     <!-- Header -->
@@ -38,56 +38,6 @@
                     <!-- Log in button -->
                     <button class="login-page-button button" id="signinPageButton" type="button">login</button>
                     <p>New to Swipped? <span class="signup-link pointer">Signup</span></p>
-                </form>
-            </div>
-            <!-- Sign up form container -->
-            <div class="signup-form-container flex display">
-                <!-- Sign up form -->
-                <form class="signup-form flex column">
-                    <!-- Sign up header -->
-                    <h1>Sign Up To Swipped</h1>
-                    <!-- Sign up username -->
-                    <div class="signup-username flex column">
-                        <label for="username">Username</label>
-                        <input type="text" class="input" id="username">
-                    </div>
-                    <!-- Sign up email -->
-                    <div class="signup-email flex column">
-                        <label for="email">Email</label>
-                        <input type="email" class="input" id="email">
-                    </div>
-                    <!-- Sign up password -->
-                    <div class="signup-password flex column">
-                        <label for="password">Password</label>
-                        <input type="password" class=" input" id="password">
-                    </div>  
-                    <!-- Sign up location -->
-                    <div class="signup-location flex column">
-                        <label for="location">Location</label>
-                        <input type="text" class="input" id="location">
-                    </div>
-                    <!-- Sign up gender and prefered gender select -->
-                    <div class="gender-select flex">
-                        <div class="signup-gender flex column">
-                            <label for="gender">Gender</label>
-                            <select class="input" id="gender">
-                                <option value="" disabled="true" selected="true"></option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-                        <div class="signup-prefered-gender flex column">
-                            <label for="preferedGender">Prefered Gender</label>
-                            <select class="input" id="preferedGender">
-                                <option value="" disabled="true" selected="true"></option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- Sign up button -->
-                    <button class="signup-page-button button" id="signinPageButton" type="button">Sign Up</button>
-                    <p>Already have an account? <span class="login-link pointer">Login</span></p>
                 </form>
             </div>
         </div>

@@ -1,3 +1,6 @@
+const loginButton = document.querySelector('.login-button');
+const createAccount = document.querySelector('.create-account');
+
 // jQuery: change Hero header opacity on scroll
 $(document).ready(function() {
 	$(window).scroll(function(event) {
@@ -21,4 +24,12 @@ const slider = tns({
 	autoplayButtonOutput: false,
 	autoplayTimeout: 3000,
 	items: 3
+});
+
+loginButton.addEventListener('click', () => {
+	window.location.href = 'login.html';
+});
+
+createAccount.addEventListener('click', () => {
+	window.location.href = 'signup.html';
 });
