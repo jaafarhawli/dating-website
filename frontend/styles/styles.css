@@ -418,6 +418,7 @@ ul {
 
 .community-grid {
 	display: flex;
+	padding: 10px;
 }
 
 .user {
@@ -426,7 +427,11 @@ ul {
 	align-items: center;
 	box-shadow: 0px 4px 15px 0px rgb(0, 0, 0, 0.4);
 	gap: 10px;
-	padding-bottom: 10px;
+	transition: 300ms;
+}
+
+.user:hover {
+	transform: scale(1.05);
 }
 
 .user-image-container {
@@ -475,4 +480,58 @@ ul {
 
 .left:hover {
 	background-color: rgb(223, 223, 223);
+}
+
+.footer-main {
+	background-color: #2f4858;
+}
+
+.footer-description-main {
+	width: 100%;
+	padding: 20px 0;
+	text-align: center;
+	font-size: 12px;
+	color: white;
+	justify-content: center;
+}
+
+/* Social media icons */
+.social-media-items-main {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	border: 2px solid white;
+	padding: 8px 0;
+	transition: 400ms;
+}
+
+.social-media-items-main:hover {
+	background-color: white;
+}
+
+.social-media-items-main:hover path {
+	fill: black;
+}
+
+/* Seperation line inside the footer */
+.footer-line-main {
+	display: block;
+	margin: 10px auto;
+	height: 2px;
+	background-color: white;
+	width: 50%;
+	border-radius: 5px;
+}
+
+/* Copyrights text */
+.copyrights-main {
+	margin: 20px auto 0;
+	text-align: center;
+	padding-bottom: 20px;
+	font-size: 12px;
+	color: white;
+}
+
+.footer-description-main p {
+	width: 50%;
 }
