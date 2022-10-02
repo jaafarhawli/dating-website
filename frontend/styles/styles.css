@@ -400,10 +400,12 @@ ul {
 	width: 30%;
 }
 
+.account-body,
 .community {
 	padding-top: 1vw;
 }
 
+.settings-header,
 .community-header {
 	width: 100%;
 	padding: 20px 1vw;
@@ -779,4 +781,69 @@ ul {
 .my-message {
 	border-radius: 5px;
 	color: white;
+}
+
+/* Account Setting */
+.account-body {
+	margin-bottom: 10vw;
+}
+
+.account-page {
+	margin-top: 20px;
+	gap: 5vw;
+}
+
+.profile-picture {
+	display: block;
+	width: 350px;
+	height: 350px;
+	border-radius: 10px;
+	object-fit: cover;
+}
+
+.logout-button,
+.save-button {
+	display: block;
+	margin: 30px 0 0 auto;
+	width: 150px !important;
+}
+
+.logout-button {
+	background: darkred;
+}
+
+.account-input {
+	flex-direction: column;
+}
+
+.account-input label {
+	margin: 0 0 5px;
+}
+
+.account-input input {
+	height: 35px;
+	margin-bottom: 30px;
+}
+
+.account-input select {
+	margin-bottom: 30px;
+}
+
+.account-input-tab {
+	width: 25vw !important;
+}
+
+.radio {
+	gap: 5px;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.private-account {
+	gap: 100px;
+	align-items: center;
+}
+
+.radio-button {
+	margin-bottom: 0 !important;
 }
