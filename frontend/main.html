@@ -141,6 +141,31 @@
         <div class="copyrights-main">© Copyright 2022 Swipped, All Rights Reserved.</div>
     </section>
     <!-- End Footer Section -->
+
+    <!-- Start Product Modal Section -->
+    <dialog class="user-modal" id="userModal">
+        <!-- Quit icon -->
+        <span class="material-symbols-outlined modal-quit pointer" id="userQuit">close</span>
+        <!-- Product info -->
+        <div class="modal-info flex" id="productModalInfo">
+            <img src="./images/pexels-ariel-paredes-2247858.jpg" alt="user image" class="user-modal-image">
+		    <div class="user-details">
+		    	<p class="user-modal-name bold">Jaafar Hawli</p>
+		    	<p class="user-modal-gender">Male</p>
+		    	<p class="user-modal-location bold">Location: Beirut</p>
+		    	<p class="user-modal-bio">Bio: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi officiis numquam eum eligendi, sapiente harum explicabo at sed enim perferendis, dolor aliquam eveniet voluptatum porro eius tempora maiores facere omnis?</p>
+		    </div>
+        </div>
+        <!-- Product action buttons -->
+        <div class="user-modal-buttons flex">
+            <button type="button" class="favorite-modal-button button">Like</button>
+            <button type="button" class="text-modal-button button">
+                Text
+            </button>
+			<button type="button" class="block-modal-button button">Block</button>
+        </div>
+    </dialog>
+    <!-- End Product Modal Section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
     <script src="./scripts/main_script.js"></script>
 </body>
