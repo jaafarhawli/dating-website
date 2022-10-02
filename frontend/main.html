@@ -204,6 +204,7 @@
 
     <!-- Start Chat Section -->
     <section class="section chat-page-body flex display" id="chat">
+        <!-- Users texted with before -->
         <div class="chat-users">
             <span class="material-symbols-outlined display chat-hamburger pointer">
                 menu
@@ -241,6 +242,7 @@
                 <h1>Username</h1>
             </div>
         </div>
+        <!-- Chat section -->
         <div class="main-chat">
             <div class="chat-title pointer"><p>Username</p> </div>
             <div class="chat-input-container flex">
@@ -271,20 +273,27 @@
 
     <!-- Start Account Section -->
     <section class="section account-body padding display" id="account">
+        <!-- Account page header -->
         <div class="settings-header">
             <h1>Account Settings</h1>
         </div>
         <div class="account-page flex">
+            <!-- Profile picture -->
             <img src="./images/pexels-ariel-paredes-2247858.jpg" alt="profile picture" class="profile-picture">
             <div class="account-input flex">
+                <!-- Username -->
                 <label for="">Username</label>
                 <input type="text" class="input round account-input-tab" id="accountName">
+                <!-- Email -->
                 <label for="">Email</label>
                 <input type="email" class="input round account-input-tab" id="accountEmail">
+                <!-- Location -->
                 <label for="">Location</label>
                 <input type="text" class="input round account-input-tab" id="accountLocation">
+                <!-- Bio -->
                 <label for="">Bio</label>
                 <input type="text" class="input round account-input-tab" id="accountBio">
+                <!-- Gender and prefered -->
                 <div class="gender-select flex">
                     <div class="signup-gender flex column">
                         <label for="gender">Gender</label>
@@ -303,6 +312,7 @@
                         </select>
                     </div>
                 </div>
+                <!-- Private account mode -->
                 <label>Private Account</label><br>
                 <div class="private-account flex">
                     <div class="radio flex">
@@ -314,8 +324,10 @@
                         <p>No</p>
                     </div>
                 </div>
+                <!-- Password -->
                 <label for="">Password</label>
                 <input type="password" class="input round account-input-tab">
+                <!-- Save and logout buttons -->
                 <div class="flex">
                     <button type="button" class="logout-button button">Logout</button>
                     <button type="button" class="save-button button">Save</button>
@@ -327,14 +339,17 @@
 
     <!-- Start Footer Section -->
     <section class="footer-main" id="footer">
+        <!-- Page logo badge -->
         <div class="footer-logo flex">
             <div class="footer-logo-container flex">
                 <img src="./images/logo-removebg-preview.png" alt="logo" class="logo">
             </div>
         </div>
+        <!-- Footer about us -->
         <div class="footer-description-main flex">
             <p>Single people, listen up: If you’re looking for love, want to start dating, or just keep it casual, you need to be on Swipped. It’s the place to be to meet your next best match. Let’s be real, the dating landscape looks very different today, as most people are meeting online. With Swipped, you have millions of other single people at your fingertips and they’re all ready to meet someone like you.</p>
         </div>
+        <!-- Social media -->
         <div class="social-media flex">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="social-media-items-main"><path fill="white" d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="social-media-items-main"><path fill="white" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
@@ -347,12 +362,12 @@
     </section>
     <!-- End Footer Section -->
 
-    <!-- Start Product Modal Section -->
+    <!-- Start User Modal Section -->
     <dialog class="user-modal" id="userModal">
         <!-- Quit icon -->
         <span class="material-symbols-outlined modal-quit pointer" id="userQuit">close</span>
-        <!-- Product info -->
-        <div class="modal-info flex" id="productModalInfo">
+        <!-- User info -->
+        <div class="modal-info flex" id="UserModalInfo">
             <img src="./images/pexels-ariel-paredes-2247858.jpg" alt="user image" class="user-modal-image">
 		    <div class="user-details">
 		    	<p class="user-modal-name bold">Jaafar Hawli</p>
@@ -361,7 +376,7 @@
 		    	<p class="user-modal-bio">Bio: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi officiis numquam eum eligendi, sapiente harum explicabo at sed enim perferendis, dolor aliquam eveniet voluptatum porro eius tempora maiores facere omnis?</p>
 		    </div>
         </div>
-        <!-- Product action buttons -->
+        <!-- User action buttons -->
         <div class="user-modal-buttons flex">
             <button type="button" class="favorite-modal-button button">Like</button>
             <button type="button" class="text-modal-button button">
@@ -370,7 +385,7 @@
 			<button type="button" class="block-modal-button button">Block</button>
         </div>
     </dialog>
-    <!-- End Product Modal Section -->
+    <!-- End User Modal Section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
     <script src="./scripts/main_script.js"></script>
 </body>

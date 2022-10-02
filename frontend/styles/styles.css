@@ -347,6 +347,7 @@ ul {
 
 /* Main Page */
 
+/* Navbar */
 .nav-elements {
 	gap: 40px;
 	color: black;
@@ -376,6 +377,7 @@ ul {
 	z-index: 100;
 }
 
+/* Home page hero */
 .main-hero {
 	width: 100%;
 	height: 100vh;
@@ -404,6 +406,8 @@ ul {
 	right: 5%;
 	width: 30%;
 }
+
+/* Community section */
 
 .account-body,
 .community {
@@ -490,6 +494,8 @@ ul {
 	background-color: rgb(223, 223, 223);
 }
 
+/* Footer section */
+
 .footer-main {
 	background-color: #2f4858;
 }
@@ -543,6 +549,8 @@ ul {
 .footer-description-main p {
 	width: 50%;
 }
+
+/* User modal */
 
 .user-modal {
 	background-color: white;
@@ -643,6 +651,8 @@ ul {
 	width: 120px !important;
 }
 
+/* Liked and Chat page hero section */
+
 .hero-liked {
 	background: url(../images/hand-painted-watercolor-background-with-sky-clouds-shape.jpg);
 	background-size: cover;
@@ -659,6 +669,8 @@ ul {
 	row-gap: 1vw;
 	padding-bottom: 80px;
 }
+
+/* Chat page */
 
 .chat-users {
 	width: 20vw;
@@ -708,7 +720,7 @@ ul {
 	display: flex;
 	position: absolute;
 	top: 0;
-	width: 100%;
+	width: calc(100vw - 25vw);
 	background: linear-gradient(to right, #ff5f40, #e74974);
 	color: white;
 	height: 30px;
@@ -789,6 +801,7 @@ ul {
 }
 
 /* Account Setting */
+
 .account-body {
 	margin-bottom: 10vw;
 }

@@ -2,7 +2,6 @@ const users = document.querySelectorAll('.user');
 const userModal = document.getElementById('userModal');
 const userQuit = document.getElementById('userQuit');
 
-// Switch between pages
 // Nav elements
 const navHome = document.getElementById('navHome');
 const navLiked = document.getElementById('navLiked');
@@ -18,6 +17,8 @@ const chat = document.getElementById('chat');
 const account = document.getElementById('account');
 const footer = document.getElementById('footer');
 
+// Switch between pages
+// Home navbar element
 navHome.addEventListener('click', () => {
 	mainHero.classList.remove('display');
 	likedHero.classList.add('display');
@@ -31,6 +32,7 @@ navHome.addEventListener('click', () => {
 	navHome.classList.add('current');
 });
 
+// Liked navbar element
 navLiked.addEventListener('click', () => {
 	mainHero.classList.add('display');
 	likedHero.classList.remove('display');
@@ -44,6 +46,7 @@ navLiked.addEventListener('click', () => {
 	navHome.classList.remove('current');
 });
 
+// Chat navbar element
 navChat.addEventListener('click', () => {
 	mainHero.classList.add('display');
 	likedHero.classList.remove('display');
@@ -57,6 +60,7 @@ navChat.addEventListener('click', () => {
 	navHome.classList.remove('current');
 });
 
+// Account navbar element
 accountButton.addEventListener('click', () => {
 	mainHero.classList.add('display');
 	likedHero.classList.remove('display');
