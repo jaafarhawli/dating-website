@@ -596,7 +596,6 @@ ul {
 
 .user-modal-name {
 	font-size: 35px;
-	color: #001743;
 	margin-bottom: 8px;
 }
 
@@ -611,7 +610,12 @@ ul {
 	margin-bottom: 20px;
 }
 
+.user-modal-location {
+	font-size: 24px;
+}
+
 .user-modal-bio {
+	margin-top: 20px;
 	font-size: 18px;
 }
 
@@ -624,7 +628,7 @@ ul {
 }
 
 .block-modal-button {
-	background-color: #001743 !important;
+	background: rgb(193, 0, 0) !important;
 }
 
 .like-modal-button,
@@ -632,8 +636,19 @@ ul {
 	width: 120px !important;
 }
 
-.like-modal-button:hover,
-.text-modal-button:hover {
-	background-color: white !important;
-	color: black !important;
+.hero-liked {
+	background: url(../images/hand-painted-watercolor-background-with-sky-clouds-shape.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	height: 200px;
+	width: 100%;
+}
+
+.liked-grid {
+	display: grid;
+	justify-content: center;
+	grid-template-columns: auto auto auto;
+	column-gap: 1vw;
+	row-gap: 1vw;
+	padding-bottom: 80px;
 }
