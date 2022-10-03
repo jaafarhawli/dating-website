@@ -27,4 +27,12 @@ class User extends Authenticatable implements JWTSubject
     public function liking() {
         return $this->belongsToMany(User::class,'liked','user_id','liking_user_id');
     }
+
+    public function blocking() {
+        return $this->belongsToMany(User::class,'blocked','blocking_user_id','blocked_user_id');
+    }
+
+    public function blocked() {
+        return $this->belongsToMany(User::class,'blocked','blocked_user_id','blocking_user_id');
+    }
 }
