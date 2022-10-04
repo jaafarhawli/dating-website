@@ -29,6 +29,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/view_chat", [ApisController::class, "viewChat"]);
 
+        Route::post("/send_message", [ApisController::class, "sendMessage"]);
+
     });
 
 });

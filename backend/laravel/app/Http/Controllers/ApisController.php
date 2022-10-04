@@ -123,4 +123,22 @@ class ApisController extends Controller
         ]);  
     }
 
+    function sendMessage(Request $request) {
+        $date = date('Y-m-d h:i:s');
+        $sender = $request->input('user_id');
+        $receiver = $request->input('chatter_id');
+        $message = $request->input('message');
+
+        $row = new Chat; 
+        $row->sender_user_id = $sender;
+        $row->sent_to_user_id = $receiver;
+        $row->message = $message;
+        $row->date = $date;
+
+        $row->save();
+        if($row->save()) {
+            return ["success" => $row];
+        }
+    }
+
 }
