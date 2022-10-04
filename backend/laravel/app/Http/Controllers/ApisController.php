@@ -113,15 +113,49 @@ class ApisController extends Controller
 
     function viewChatUsers(Request $request) {
         $user_id = $request->input('user_id');
-        $users = User::select('users.id','users.name','users.profile_url')->distinct()->join('chats', 'users.id', '=', 'chats.sent_to_user_id')->where(function($query) use($user_id) {
-            $query->where('chats.sender_user_id','=',$user_id)->orWhere('chats.sent_to_user_id','=',$user_id);
-        })->whereNotIn('users.id', [$user_id])->get();
 
-        $users2 = User::select('users.id','users.name','users.profile_url')->distinct()->join('chats', 'users.id', '=', 'chats.sender_user_id')->where(function($query) use($user_id) {
-            $query->where('chats.sender_user_id','=',$user_id)->orWhere('chats.sent_to_user_id','=',$user_id);
-        })->whereNotIn('users.id', [$user_id])->get();
+        $usersSent = User::select('users.id','users.name','users.profile_url')
+        ->distinct()
+        ->join('chats', 'users.id', '=', 'chats.sent_to_user_id')
+        ->where(function($query) use($user_id) {
+            $query->where('chats.sender_user_id','=',$user_id)
+            ->orWhere('chats.sent_to_user_id','=',$user_id);
+        })
+        ->whereNotIn('users.id', [$user_id])
+        ->whereNotIn('users.id', function ($blocked) use($user_id) {
+            $blocked->select("blocked_user_id")
+            ->from('blocks')
+            ->where('blocking_user_id',$user_id);
+        })
+        ->whereNotIn('users.id', function($blockedBy) use($user_id) {
+            $blockedBy->select("blocking_user_id")
+            ->from('blocks')
+            ->where('blocked_user_id',$user_id);
+        })
+        ->get();
 
-        $usersAll = $users->merge($users2);
+
+        $usersReceived = User::select('users.id','users.name','users.profile_url')
+        ->distinct()
+        ->join('chats', 'users.id', '=', 'chats.sender_user_id')
+        ->where(function($query) use($user_id) {
+            $query->where('chats.sender_user_id','=',$user_id)
+            ->orWhere('chats.sent_to_user_id','=',$user_id);
+        })
+        ->whereNotIn('users.id', [$user_id])
+        ->whereNotIn('users.id', function ($blocked) use($user_id) {
+            $blocked->select("blocked_user_id")
+            ->from('blocks')
+            ->where('blocking_user_id',$user_id);
+        })
+        ->whereNotIn('users.id', function($blockedBy) use($user_id) {
+            $blockedBy->select("blocking_user_id")
+            ->from('blocks')
+            ->where('blocked_user_id',$user_id);
+        })
+        ->get();
+
+        $usersAll = $usersSent->merge($usersReceived);
 
         return response()->json([
             "status" => "Success",
