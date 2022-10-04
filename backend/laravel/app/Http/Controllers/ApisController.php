@@ -141,4 +141,27 @@ class ApisController extends Controller
         }
     }
 
+    function settings(Request $request) {
+        $id = $request->input('id');
+        $newName = $request->input('name');
+        $oldEmail = $request->input('oldEmail');
+        $newEmail = $request->input('email');
+        $newLocation = $request->input('location');
+        $newBio = $request->input('bio');
+        $privateAccount = $request->input('private');
+        $newPassword = $request ->input('password');
+        $email = User::where('email','=',$newEmail)->get();
+        if($newEmail=='') {
+            User::where('id',$id)->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'bio' => $newBio, 'private_account' => $privateAccount, 'password' => $newPassword]);
+            return ["success" => "operation succeeded"];
+        }
+        else if(count($email)>0) {
+            return ["success" => "operation failed"];
+        }
+        else {
+            User::where('id',$id)->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'bio' => $newBio, 'private_account' => $privateAccount, 'password' => $newPassword]);
+            return ["success" => "operation succeeded"];
+        }
+    }
+
 }

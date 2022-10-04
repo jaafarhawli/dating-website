@@ -31,6 +31,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/send_message", [ApisController::class, "sendMessage"]);
 
+        Route::post("/settings", [ApisController::class, "settings"]);
+
     });
 
 });
