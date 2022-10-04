@@ -34,6 +34,9 @@ const chatContainer = document.getElementById('chatContainer');
 const modalButtons = document.getElementById('modalButtons');
 const saveButton = document.getElementById('saveButton');
 const logoutButton = document.getElementById('logoutButton');
+const chatTitle = document.getElementById('chatTitle');
+const chatInput = document.getElementById('chatInput');
+const sendButton = document.getElementById('sendButton');
 
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
@@ -320,7 +323,7 @@ const viewChatUsers = async () => {
 		});
 		viewUsers.data.data.forEach((user) => {
 			chatUsers.innerHTML += `
-			<div class="user-chat-element flex pointer" onclick="viewChat(${user.id})">
+			<div class="user-chat-element flex pointer" onclick="viewChat(${user.id}, ${user.name})">
                 <img src="${user.profile_url}" alt="profile">
                 <h1>${user.name}</h1>
             </div>`;
@@ -330,7 +333,7 @@ const viewChatUsers = async () => {
 	}
 };
 
-const viewChat = async (id) => {
+const viewChat = async (id, name) => {
 	const form = {
 		user_id: localStorage.id,
 		chatter_id: id
@@ -350,7 +353,35 @@ const viewChat = async (id) => {
 				<div class="user-message">${text.message}</div>`;
 			}
 		});
+		chatTitle.innerHTML = name;
 	} catch (error) {
 		console.log(error);
 	}
 };
+
+const sendMessage = async (id) => {
+	const form = {
+		user_id: localStorage.id,
+		chatter_id: id,
+		message: chatInput.value
+	};
+	try {
+		const send = await axios.post(`${baseURL}/send_message`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		chatContainer.innerHTML += `<div class="my-message">${send.data.data[0].message}</div>`;
+		chatInput.value = '';
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+sendButton.addEventListener('click', sendMessage);
+
+chatInput.addEventListener('keypress', (e) => {
+	if (e.key === 'Enter') {
+		sendMessage();
+	}
+});
