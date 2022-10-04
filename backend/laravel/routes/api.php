@@ -21,6 +21,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/like", [ApisController::class, "like"]);
 
+        Route::post("/block", [ApisController::class, "block"]);
+
     });
 
 });

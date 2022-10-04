@@ -68,4 +68,23 @@ class ApisController extends Controller
             }
         }
     }
+
+    function block(Request $request) {
+        $blocker_id = $request->input('blocking_user_id');
+        $blocked_id = $request->input('blocked_user_id');
+        $data = Block::where("blocking_user_id","=",$blocker_id)->where("blocked_user_id","=",$blocked_id)->get();
+        if(count($data)>0) {
+            return ["success" => "operation failed"];
+        }
+        else {
+            $row = new Block;
+            $row->blocking_user_id = $blocker_id;
+            $row->blocked_user_id = $blocked_id;
+
+            $row->save();
+            if($row->save()) {
+                return ["success" => $row];
+            }
+        }
+    }
 }
