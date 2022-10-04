@@ -27,6 +27,7 @@ const accountGender = document.getElementById('gender');
 const accountPreferedGender = document.getElementById('preferedGender');
 
 const communityGrid = document.getElementById('communityGrid');
+const likedGrid = document.getElementById('likedGrid');
 const userModalInfo = document.getElementById('userModalInfo');
 const modalButtons = document.getElementById('modalButtons');
 
@@ -42,6 +43,7 @@ window.onload = () => {
 	accountPreferedGender.value = localStorage.prefered_gender;
 	accountLocation.value = localStorage.location;
 	viewCommunity();
+	likedUsers();
 	// console.log(localStorage.location);
 };
 
@@ -214,6 +216,7 @@ const like = async (id) => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		window.location.reload();
 	} catch (error) {
 		console.log(error);
 	}
@@ -231,6 +234,35 @@ const block = async (id) => {
 			}
 		});
 		window.location.reload();
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+const likedUsers = async () => {
+	const form = {
+		user_id: localStorage.id
+	};
+	try {
+		const viewLiked = await axios.post(`${baseURL}/view_likes`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		viewLiked.data.data.forEach((user) => {
+			likedGrid.innerHTML += `
+			<div>
+				<div class="user flex column" onclick="showUser(${user.id})">
+					<div class="user-image-container">
+						<img src="${user.profile_url}" alt="">
+					</div>
+					<div class="user-content flex column">
+						<h2 class="username">${user.name}</h2>
+						<h3 class="user-location">${user.location}</h3>
+					</div>
+				</div>
+			</div>`;
+		});
 	} catch (error) {
 		console.log(error);
 	}
