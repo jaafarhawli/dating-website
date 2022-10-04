@@ -25,6 +25,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/view_likes", [ApisController::class, "viewLikes"]);
 
+        Route::post("/view_chat_users", [ApisController::class, "viewChatUsers"]);
+
     });
 
 });

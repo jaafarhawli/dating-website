@@ -101,4 +101,15 @@ class ApisController extends Controller
             "data" => $users
         ]);  
     }
+
+    function viewChatUsers(Request $request) {
+        $user_id = $request->input('user_id');
+        $users = User::select('users.id','users.name','users.profile_url')->distinct()->join('chats', 'users.id', '=', 'chats.sender_user_id')->where('chats.sender_user_id','=',$user_id)->whereNotIn('users.id', [2])->orWhere('chats.sent_to_user_id','=',$user_id)->whereNotIn('users.id', [2])->get();
+
+        return response()->json([
+            "status" => "Success",
+            "data" => $users
+        ]);  
+    }
+
 }
