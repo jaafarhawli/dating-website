@@ -214,7 +214,23 @@ const like = async (id) => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
-		console.log(likeUser);
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+const block = async (id) => {
+	const form = {
+		blocking_user_id: localStorage.id,
+		blocked_user_id: id
+	};
+	try {
+		const blockUser = await axios.post(`${baseURL}/block`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		window.location.reload();
 	} catch (error) {
 		console.log(error);
 	}
