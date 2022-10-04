@@ -15,11 +15,19 @@ class ApisController extends Controller
         $prefered = $request->input('preferedGender');
         $id = $request->input('id');
 
-        $users = User::where(["location" => $loc,"gender" => $prefered])->whereNotIn('id', function ($blocked) use($id) {
-            $blocked->select("blocked_user_id")->from('blocks')->where('blocking_user_id',$id);
-        })->whereNotIn('id', function($blockedBy) use($id) {
-            $blockedBy->select("blocking_user_id")->from('blocks')->where('blocked_user_id',$id);
-        })->get();
+        $users = User::where(["location" => $loc,"gender" => $prefered])
+        ->whereNotIn('id', function ($blocked) use($id) {
+            $blocked->select("blocked_user_id")
+            ->from('blocks')
+            ->where('blocking_user_id',$id);
+        })
+        ->whereNotIn('id', function($blockedBy) use($id) {
+            $blockedBy->select("blocking_user_id")
+            ->from('blocks')
+            ->where('blocked_user_id',$id);
+        })
+        ->get();
+
         return response()->json([
             "status" => "Success",
             "data" => $users
@@ -30,11 +38,21 @@ class ApisController extends Controller
         $loc = $request->input('location');
         $prefered = $request->input('preferedGender');
         $id = $request->input('id');
-        $users= User::where("location","!=",$loc)->where("gender","=",$prefered)->whereNotIn('id', function ($blocked) use($id) {
-            $blocked->select("blocked_user_id")->from('blocks')->where('blocking_user_id',$id);
-        })->whereNotIn('id', function($blockedBy) use($id) {
-            $blockedBy->select("blocking_user_id")->from('blocks')->where('blocked_user_id',$id);
-        })->get();
+
+        $users= User::where("location","!=",$loc)
+        ->where("gender","=",$prefered)
+        ->whereNotIn('id', function ($blocked) use($id) {
+            $blocked->select("blocked_user_id")
+            ->from('blocks')
+            ->where('blocking_user_id',$id);
+        })
+        ->whereNotIn('id', function($blockedBy) use($id) {
+            $blockedBy->select("blocking_user_id")
+            ->from('blocks')
+            ->where('blocked_user_id',$id);
+        })
+        ->get();
+
         return response()->json([
             "status" => "Success",
             "data" => $users
@@ -43,7 +61,10 @@ class ApisController extends Controller
 
     function showUser(Request $id) {
         $user_id = $id->input('id');
-        $data = User::select("id","name","location","gender","prefered_gender","bio","profile_url")->where("id", $user_id)->get();
+        $data = User::select("id","name","location","gender","prefered_gender","bio","profile_url")
+        ->where("id", $user_id)
+        ->get();
+
         return response()->json([
             "status" => "Success",
             "data" => $data
@@ -52,7 +73,10 @@ class ApisController extends Controller
 
     function accountInfo(Request $request) {
         $email = $request->input('email');
-        $data = User::where("email", $email)->get();
+
+        $data = User::where("email", $email)
+        ->get();
+
         return response()->json([
             "status" => "Success",
             "data" => $data
@@ -62,7 +86,11 @@ class ApisController extends Controller
     function like(Request $request) {
         $liker_id = $request->input('user_id');
         $liked_id = $request->input('liking_user_id');
-        $data = Like::where("user_id","=",$liker_id)->where("liking_user_id","=",$liked_id)->get();
+
+        $data = Like::where("user_id","=",$liker_id)
+        ->where("liking_user_id","=",$liked_id)
+        ->get();
+
         if(count($data)>0) {
             return ["success" => "operation failed"];
         }
@@ -81,7 +109,11 @@ class ApisController extends Controller
     function block(Request $request) {
         $blocker_id = $request->input('blocking_user_id');
         $blocked_id = $request->input('blocked_user_id');
-        $data = Block::where("blocking_user_id","=",$blocker_id)->where("blocked_user_id","=",$blocked_id)->get();
+
+        $data = Block::where("blocking_user_id","=",$blocker_id)
+        ->where("blocked_user_id","=",$blocked_id)
+        ->get();
+
         if(count($data)>0) {
             return ["success" => "operation failed"];
         }
@@ -99,11 +131,21 @@ class ApisController extends Controller
 
     function viewLikes (Request $request) {
         $liker_id = $request->input('user_id');
-        $users = User::select('users.id','users.name','users.location','users.profile_url')->join('likes', 'users.id', '=', 'likes.liking_user_id')->where('likes.user_id','=',$liker_id)->whereNotIn('users.id', function ($blocked) use($liker_id) {
-            $blocked->select("blocked_user_id")->from('blocks')->where('blocking_user_id',$liker_id);
-        })->whereNotIn('users.id', function($blockedBy) use($liker_id) {
-            $blockedBy->select("blocking_user_id")->from('blocks')->where('blocked_user_id',$liker_id);
-        })->get();
+
+        $users = User::select('users.id','users.name','users.location','users.profile_url')
+        ->join('likes', 'users.id', '=', 'likes.liking_user_id')
+        ->where('likes.user_id','=',$liker_id)
+        ->whereNotIn('users.id', function ($blocked) use($liker_id) {
+            $blocked->select("blocked_user_id")
+            ->from('blocks')
+            ->where('blocking_user_id',$liker_id);
+        })
+        ->whereNotIn('users.id', function($blockedBy) use($liker_id) {
+            $blockedBy->select("blocking_user_id")
+            ->from('blocks')
+            ->where('blocked_user_id',$liker_id);
+        })
+        ->get();
 
         return response()->json([
             "status" => "Success",
@@ -166,11 +208,17 @@ class ApisController extends Controller
     function viewChaT(Request $request) {
         $user_id = $request->input('user_id');
         $chatter_id = $request->input('chatter_id');
-        $messages = Chat::select('message','sender_user_id')->where(function($query) use($user_id, $chatter_id) {
-            $query->where('sender_user_id','=',$user_id)->where('sent_to_user_id','=',$chatter_id);
-        })->orWhere(function($query) use($user_id, $chatter_id) {
-            $query->where('sender_user_id','=',$chatter_id)->where('sent_to_user_id','=',$user_id);
-        })->orderby('date')-> get();
+
+        $messages = Chat::select('message','sender_user_id')
+        ->where(function($query) use($user_id, $chatter_id) {
+            $query->where('sender_user_id','=',$user_id)
+            ->where('sent_to_user_id','=',$chatter_id);
+        })
+        ->orWhere(function($query) use($user_id, $chatter_id) {
+            $query->where('sender_user_id','=',$chatter_id)
+            ->where('sent_to_user_id','=',$user_id);
+        })
+        ->orderby('date')-> get();
 
         return response()->json([
             "status" => "Success",
@@ -206,16 +254,19 @@ class ApisController extends Controller
         $newPassword =  bcrypt($request ->input('password'));
         $email = User::where('email','=',$newEmail)->get();
         if($newEmail=='' || $newEmail==$oldEmail) {
-            User::where('id',$id)->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'bio' => $newBio, 'password' => $newPassword]);
+            User::where('id',$id)
+            ->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'bio' => $newBio, 'password' => $newPassword]);
+
             return ["success" => "operation succeeded"];
         }
         else if(count($email)>0) {
             return ["success" => "operation failed"];
         }
         else {
-            User::where('id',$id)->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'bio' => $newBio, 'password' => $newPassword]);
+            User::where('id',$id)
+            ->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'bio' => $newBio, 'password' => $newPassword]);
+
             return ["success" => "operation succeeded"];
         }
     }
-
 }
