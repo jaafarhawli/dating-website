@@ -27,6 +27,8 @@ const accountGender = document.getElementById('gender');
 const accountPreferedGender = document.getElementById('preferedGender');
 
 const communityGrid = document.getElementById('communityGrid');
+const userModalInfo = document.getElementById('userModalInfo');
+const modalButtons = document.getElementById('modalButtons');
 
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
@@ -100,12 +102,6 @@ accountButton.addEventListener('click', () => {
 	navHome.classList.remove('current');
 });
 
-users[0].addEventListener('click', () => {
-	userModal.showModal();
-	document.body.style.overflow = 'hidden';
-	document.body.style.userSelect = 'none';
-});
-
 userQuit.addEventListener('click', () => {
 	userModal.close();
 	document.body.style.overflow = 'auto';
@@ -127,7 +123,7 @@ const viewCommunity = async () => {
 		communityNearby.data.data.forEach((user) => {
 			communityGrid.innerHTML += `
 			<div>
-				<div class="user flex column">
+				<div class="user flex column" onclick="showUser(${user.id})">
 					<div class="user-image-container">
 						<img src="${user.profile_url}" alt="">
 					</div>
@@ -146,7 +142,7 @@ const viewCommunity = async () => {
 		communityRest.data.data.forEach((farUser) => {
 			communityGrid.innerHTML += `
 			<div>
-				<div class="user flex column">
+				<div class="user flex column" onclick="showUser(${farUser.id})">
 					<div class="user-image-container">
 						<img src="${farUser.profile_url}" alt="">
 					</div>
@@ -173,4 +169,25 @@ const viewCommunity = async () => {
 	} catch (error) {
 		console.log(error);
 	}
+};
+
+const showUser = async (userId) => {
+	const id = { id: userId };
+	const userInfo = await axios.post(`${baseURL}/show_user`, id, {
+		headers: {
+			Authorization: `bearer ${localStorage.token}`
+		}
+	});
+	userModalInfo.innerHTML = `
+			<img src="${userInfo.data.data[0].profile_url}" alt="user image" class="user-modal-image">
+		    <div class="user-details">
+		    	<p class="user-modal-name bold">${userInfo.data.data[0].name}</p>
+		    	<p class="user-modal-gender">${userInfo.data.data[0].gender}</p>
+		    	<p class="user-modal-location bold">${userInfo.data.data[0].location}</p>
+		    	<p class="user-modal-bio">${userInfo.data.data[0].bio}</p>
+		    </div>`;
+
+	userModal.showModal();
+	document.body.style.overflow = 'hidden';
+	document.body.style.userSelect = 'none';
 };
