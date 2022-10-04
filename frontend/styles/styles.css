@@ -720,7 +720,7 @@ ul {
 	display: flex;
 	position: absolute;
 	top: 0;
-	width: calc(100vw - 25vw);
+	width: 100%;
 	background: linear-gradient(to right, #ff5f40, #e74974);
 	color: white;
 	height: 30px;

@@ -336,6 +336,7 @@ const viewChatUsers = async () => {
 
 const viewChat = async (id) => {
 	currentUser = id;
+	chatContainer.innerHTML = '';
 	const form = {
 		user_id: localStorage.id,
 		chatter_id: id
@@ -346,7 +347,7 @@ const viewChat = async (id) => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
-		chatContainer.innerHTML = '';
+
 		viewChat.data.data.forEach((text) => {
 			if (text.sender_user_id == localStorage.id) {
 				chatContainer.innerHTML += `
@@ -356,6 +357,13 @@ const viewChat = async (id) => {
 				<div class="user-message">${text.message}</div>`;
 			}
 		});
+		const formId = { id: currentUser };
+		const showName = await axios.post(`${baseURL}/show_user`, formId, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		chatTitle.innerHTML = showName.data.data[0].name;
 	} catch (error) {
 		console.log(error);
 	}
