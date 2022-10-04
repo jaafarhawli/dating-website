@@ -30,6 +30,7 @@ const communityGrid = document.getElementById('communityGrid');
 const userModalInfo = document.getElementById('userModalInfo');
 const likedGrid = document.getElementById('likedGrid');
 const chatUsers = document.getElementById('chatUsers');
+const chatContainer = document.getElementById('chatContainer');
 const modalButtons = document.getElementById('modalButtons');
 const saveButton = document.getElementById('saveButton');
 const logoutButton = document.getElementById('logoutButton');
@@ -323,6 +324,31 @@ const viewChatUsers = async () => {
                 <img src="${user.profile_url}" alt="profile">
                 <h1>${user.name}</h1>
             </div>`;
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+const viewChat = async (id) => {
+	const form = {
+		user_id: localStorage.id,
+		chatter_id: id
+	};
+	try {
+		const viewChat = await axios.post(`${baseURL}/view_chat`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		viewChat.data.data.forEach((text) => {
+			if (message.id == localStorage.id) {
+				chatContainer.innerHTML += `
+				<div class="my-message">${text.message}</div>`;
+			} else {
+				chatContainer.innerHTML += `
+				<div class="user-message">${text.message}</div>`;
+			}
 		});
 	} catch (error) {
 		console.log(error);
