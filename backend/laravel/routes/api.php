@@ -17,6 +17,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/show_rest", [ApisController::class, "showRest"]);
 
+        Route::post("/show_user", [ApisController::class, "showUser"]);
+
     });
 
 });

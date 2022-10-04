@@ -40,4 +40,13 @@ class ApisController extends Controller
             "data" => $users
         ]);    
     }
+
+    function showUser(Request $id) {
+        $user_id = $id->input('id');
+        $data = User::select("name","location","gender","prefered_gender","bio","profile_url")->where("id", $user_id)->get();
+        return response()->json([
+            "status" => "Success",
+            "data" => $data
+        ]);
+    }
 }
