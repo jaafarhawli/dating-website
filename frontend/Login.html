@@ -27,13 +27,13 @@
                     <h1>Welcome To Swipped</h1>
                     <!-- Log in Email -->
                     <div class="login-email flex column">
-                        <label for="">Email</label>
-                        <input type="email" class="input">
+                        <label for="email">Email</label>
+                        <input type="email" class="input" id="email">
                     </div>
                     <!-- Log in password -->
                     <div class="login-password flex column">
-                        <label for="">Password</label>
-                        <input type="password" class=" input">
+                        <label for="password">Password</label>
+                        <input type="password" class=" input" id="password">
                     </div>  
                     <!-- Log in button -->
                     <button class="login-page-button button" id="signinPageButton" type="button">login</button>
@@ -43,6 +43,7 @@
         </div>
     </section>
     <!-- End Log in / Sign up Section -->
+    <script src="../backend/axios/node_modules/axios/dist/axios.min.js"></script>
     <script src="./scripts/login_script.js"></script>
 </body>
 </html>

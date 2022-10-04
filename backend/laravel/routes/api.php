@@ -19,6 +19,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/show_user", [ApisController::class, "showUser"]);
 
+        Route::post("/account_info", [ApisController::class, "accountInfo"]);
+
         Route::post("/like", [ApisController::class, "like"]);
 
         Route::post("/block", [ApisController::class, "block"]);

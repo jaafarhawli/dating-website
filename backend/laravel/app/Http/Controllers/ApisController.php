@@ -50,6 +50,15 @@ class ApisController extends Controller
         ]);
     }
 
+    function accountInfo(Request $request) {
+        $email = $request->input('email');
+        $data = User::where("email", $email)->get();
+        return response()->json([
+            "status" => "Success",
+            "data" => $data
+        ]);
+    }
+
     function like(Request $request) {
         $liker_id = $request->input('user_id');
         $liked_id = $request->input('liking_user_id');
