@@ -186,7 +186,12 @@ const showUser = async (userId) => {
 		    	<p class="user-modal-location bold">${userInfo.data.data[0].location}</p>
 		    	<p class="user-modal-bio">${userInfo.data.data[0].bio}</p>
 		    </div>`;
-
+	modalButtons.innerHTML = `
+			<button type="button" class="favorite-modal-button button"  onclick="like(${userInfo.data.data[0].id})">Like</button>
+            <button type="button" class="text-modal-button button" onclick="message(${userInfo.data.data[0].id})">
+                Text
+            </button>
+			<button type="button" class="block-modal-button button" onclick="block(${userInfo.data.data[0].id})">Block</button>`;
 	userModal.showModal();
 	document.body.style.overflow = 'hidden';
 	document.body.style.userSelect = 'none';
