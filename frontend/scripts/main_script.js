@@ -37,6 +37,7 @@ const logoutButton = document.getElementById('logoutButton');
 const chatTitle = document.getElementById('chatTitle');
 const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
+let currentUser;
 
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
@@ -323,7 +324,7 @@ const viewChatUsers = async () => {
 		});
 		viewUsers.data.data.forEach((user) => {
 			chatUsers.innerHTML += `
-			<div class="user-chat-element flex pointer" onclick="viewChat(${user.id}, ${user.name})">
+			<div class="user-chat-element flex pointer" onclick="viewChat(${user.id})">
                 <img src="${user.profile_url}" alt="profile">
                 <h1>${user.name}</h1>
             </div>`;
@@ -333,7 +334,8 @@ const viewChatUsers = async () => {
 	}
 };
 
-const viewChat = async (id, name) => {
+const viewChat = async (id) => {
+	currentUser = id;
 	const form = {
 		user_id: localStorage.id,
 		chatter_id: id
@@ -344,8 +346,9 @@ const viewChat = async (id, name) => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		chatContainer.innerHTML = '';
 		viewChat.data.data.forEach((text) => {
-			if (message.id == localStorage.id) {
+			if (text.sender_user_id == localStorage.id) {
 				chatContainer.innerHTML += `
 				<div class="my-message">${text.message}</div>`;
 			} else {
@@ -353,16 +356,15 @@ const viewChat = async (id, name) => {
 				<div class="user-message">${text.message}</div>`;
 			}
 		});
-		chatTitle.innerHTML = name;
 	} catch (error) {
 		console.log(error);
 	}
 };
 
-const sendMessage = async (id) => {
+const sendMessage = async () => {
 	const form = {
 		user_id: localStorage.id,
-		chatter_id: id,
+		chatter_id: currentUser,
 		message: chatInput.value
 	};
 	try {
@@ -371,7 +373,7 @@ const sendMessage = async (id) => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
-		chatContainer.innerHTML += `<div class="my-message">${send.data.data[0].message}</div>`;
+		chatContainer.innerHTML += `<div class="my-message">${chatInput.value}</div>`;
 		chatInput.value = '';
 	} catch (error) {
 		console.log(error);
@@ -385,3 +387,21 @@ chatInput.addEventListener('keypress', (e) => {
 		sendMessage();
 	}
 });
+
+const message = (id) => {
+	viewChat(id);
+	userModal.close();
+	document.body.style.overflow = 'auto';
+	document.body.style.userSelect = 'auto';
+
+	mainHero.classList.add('display');
+	likedHero.classList.remove('display');
+	community.classList.add('display');
+	footer.classList.add('display');
+	liked.classList.add('display');
+	chat.classList.remove('display');
+	account.classList.add('display');
+	navChat.classList.add('current');
+	navLiked.classList.remove('current');
+	navHome.classList.remove('current');
+};

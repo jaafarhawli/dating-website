@@ -113,7 +113,7 @@ class ApisController extends Controller
 
     function viewChatUsers(Request $request) {
         $user_id = $request->input('user_id');
-        $users = User::select('users.id','users.name','users.profile_url')->distinct()->join('chats', 'users.id', '=', 'chats.sender_user_id')->where('chats.sender_user_id','=',$user_id)->whereNotIn('users.id', [2])->orWhere('chats.sent_to_user_id','=',$user_id)->whereNotIn('users.id', [2])->get();
+        $users = User::select('users.id','users.name','users.profile_url')->distinct()->join('chats', 'users.id', '=', 'chats.sender_user_id')->where('chats.sender_user_id','=',$user_id)->whereNotIn('users.id', [$user_id])->orWhere('chats.sent_to_user_id','=',$user_id)->whereNotIn('users.id', [$user_id])->get();
 
         return response()->json([
             "status" => "Success",
@@ -124,7 +124,11 @@ class ApisController extends Controller
     function viewChaT(Request $request) {
         $user_id = $request->input('user_id');
         $chatter_id = $request->input('chatter_id');
-        $messages = Chat::select('message','sender_user_id')->where(['sender_user_id' => $user_id, 'sent_to_user_id'=>$chatter_id])->orWhere(['sender_user_id' => $chatter_id, 'sent_to_user_id'=>$user_id])->orderby('date', 'DESC')-> get();
+        $messages = Chat::select('message','sender_user_id')->where(function($query) use($user_id, $chatter_id) {
+            $query->where('sender_user_id','=',$user_id)->where('sent_to_user_id','=',$chatter_id);
+        })->orWhere(function($query) use($user_id, $chatter_id) {
+            $query->where('sender_user_id','=',$chatter_id)->where('sent_to_user_id','=',$user_id);
+        })->orderby('date')-> get();
 
         return response()->json([
             "status" => "Success",
