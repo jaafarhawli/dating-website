@@ -112,4 +112,15 @@ class ApisController extends Controller
         ]);  
     }
 
+    function viewChaT(Request $request) {
+        $user_id = $request->input('user_id');
+        $chatter_id = $request->input('chatter_id');
+        $messages = Chat::select('message','sender_user_id')->where(['sender_user_id' => $user_id, 'sent_to_user_id'=>$chatter_id])->orWhere(['sender_user_id' => $chatter_id, 'sent_to_user_id'=>$user_id])->orderby('date', 'DESC')-> get();
+
+        return response()->json([
+            "status" => "Success",
+            "data" => $messages
+        ]);  
+    }
+
 }
