@@ -11,6 +11,11 @@ use App\Http\Controllers\AuthController;
     
     Route::post('register', [AuthController::class, "register"]);
     
+    Route::group(["middleware" => "auth:api"], function() {
+
+        Route::post("/show_nearby", [ApisController::class, "showNearby"]);
+
+    });
 
 });
 
