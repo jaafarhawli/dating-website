@@ -173,26 +173,49 @@ const viewCommunity = async () => {
 
 const showUser = async (userId) => {
 	const id = { id: userId };
-	const userInfo = await axios.post(`${baseURL}/show_user`, id, {
-		headers: {
-			Authorization: `bearer ${localStorage.token}`
-		}
-	});
-	userModalInfo.innerHTML = `
-			<img src="${userInfo.data.data[0].profile_url}" alt="user image" class="user-modal-image">
-		    <div class="user-details">
-		    	<p class="user-modal-name bold">${userInfo.data.data[0].name}</p>
-		    	<p class="user-modal-gender">${userInfo.data.data[0].gender}</p>
-		    	<p class="user-modal-location bold">${userInfo.data.data[0].location}</p>
-		    	<p class="user-modal-bio">${userInfo.data.data[0].bio}</p>
-		    </div>`;
-	modalButtons.innerHTML = `
-			<button type="button" class="favorite-modal-button button"  onclick="like(${userInfo.data.data[0].id})">Like</button>
-            <button type="button" class="text-modal-button button" onclick="message(${userInfo.data.data[0].id})">
-                Text
-            </button>
-			<button type="button" class="block-modal-button button" onclick="block(${userInfo.data.data[0].id})">Block</button>`;
-	userModal.showModal();
-	document.body.style.overflow = 'hidden';
-	document.body.style.userSelect = 'none';
+	try {
+		const userInfo = await axios.post(`${baseURL}/show_user`, id, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		userModalInfo.innerHTML = `
+				<img src="${userInfo.data.data[0].profile_url}" alt="user image" class="user-modal-image">
+				<div class="user-details">
+					<p class="user-modal-name bold">${userInfo.data.data[0].name}</p>
+					<p class="user-modal-gender">${userInfo.data.data[0].gender}</p>
+					<p class="user-modal-location bold">${userInfo.data.data[0].location}</p>
+					<p class="user-modal-bio">${userInfo.data.data[0].bio}</p>
+				</div>`;
+		modalButtons.innerHTML = `
+				<button type="button" class="favorite-modal-button button"  onclick="like(${userInfo.data.data[0]
+					.id})">Like</button>
+				<button type="button" class="text-modal-button button" onclick="message(${userInfo.data.data[0].id})">
+					Text
+				</button>
+				<button type="button" class="block-modal-button button" onclick="block(${userInfo.data.data[0]
+					.id})">Block</button>`;
+		userModal.showModal();
+		document.body.style.overflow = 'hidden';
+		document.body.style.userSelect = 'none';
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+const like = async (id) => {
+	const form = {
+		user_id: localStorage.id,
+		liking_user_id: id
+	};
+	try {
+		const likeUser = await axios.post(`${baseURL}/like`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		console.log(likeUser);
+	} catch (error) {
+		console.log(error);
+	}
 };
