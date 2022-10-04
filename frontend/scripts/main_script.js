@@ -26,6 +26,11 @@ const accountBio = document.getElementById('accountBio');
 const accountGender = document.getElementById('gender');
 const accountPreferedGender = document.getElementById('preferedGender');
 
+const communityGrid = document.getElementById('communityGrid');
+
+const baseURL = 'http://127.0.0.1:8000/api/v0.1';
+
+// Default values in account settings
 window.onload = () => {
 	accountName.value = localStorage.name;
 	accountEmail.value = localStorage.email;
@@ -34,6 +39,8 @@ window.onload = () => {
 	accountGender.value = localStorage.gender;
 	accountPreferedGender.value = localStorage.prefered_gender;
 	accountLocation.value = localStorage.location;
+	viewCommunity();
+	// console.log(localStorage.location);
 };
 
 // Switch between pages
@@ -93,19 +100,6 @@ accountButton.addEventListener('click', () => {
 	navHome.classList.remove('current');
 });
 
-// Community section slider
-const communitySlider = tns({
-	container: '.community-grid',
-	slideBy: 1,
-	speed: 400,
-	nav: false,
-	controlsContainer: '#SwipeControls',
-	prevButton: '.right',
-	nextButton: '.left',
-	gutter: 10,
-	items: 3
-});
-
 users[0].addEventListener('click', () => {
 	userModal.showModal();
 	document.body.style.overflow = 'hidden';
@@ -117,3 +111,46 @@ userQuit.addEventListener('click', () => {
 	document.body.style.overflow = 'auto';
 	document.body.style.userSelect = 'auto';
 });
+
+const viewCommunity = async () => {
+	const form = {
+		location: localStorage.location,
+		preferedGender: localStorage.prefered_gender,
+		id: localStorage.id
+	};
+	try {
+		const communityNearby = await axios.post(`${baseURL}/show_nearby`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		communityNearby.data.data.forEach((user) => {
+			communityGrid.innerHTML += `
+			<div>
+				<div class="user flex column">
+					<div class="user-image-container">
+						<img src="${user.profile_url}" alt="">
+					</div>
+					<div class="user-content flex column">
+						<h2 class="username">${user.name}</h2>
+						<h3 class="user-location">${user.location}</h3>
+					</div>
+				</div>
+			</div>`;
+		});
+		// Community section slider
+		const communitySlider = tns({
+			container: '.community-grid',
+			slideBy: 1,
+			speed: 400,
+			nav: false,
+			controlsContainer: '#SwipeControls',
+			prevButton: '.right',
+			nextButton: '.left',
+			gutter: 10,
+			items: 3
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};

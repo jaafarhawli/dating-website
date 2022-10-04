@@ -26,7 +26,7 @@ const login = async () => {
 					Authorization: `bearer ${res.data.access_token}`
 				}
 			});
-			localStorage.setItem('token', res.data.acces_token);
+			localStorage.setItem('token', res.data.access_token);
 			localStorage.setItem('id', info.data.data[0].id);
 			localStorage.setItem('name', info.data.data[0].name);
 			localStorage.setItem('email', info.data.data[0].email);
