@@ -49,4 +49,23 @@ class ApisController extends Controller
             "data" => $data
         ]);
     }
+
+    function like(Request $request) {
+        $liker_id = $request->input('user_id');
+        $liked_id = $request->input('liking_user_id');
+        $data = Like::where("user_id","=",$liker_id)->where("liking_user_id","=",$liked_id)->get();
+        if(count($data)>0) {
+            return ["success" => "operation failed"];
+        }
+        else {
+            $row = new Like;
+            $row->user_id = $liker_id;
+            $row->liking_user_id = $liked_id;
+
+            $row->save();
+            if($row->save()) {
+                return ["success" => $row];
+            }
+        }
+    }
 }
