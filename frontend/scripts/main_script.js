@@ -30,6 +30,7 @@ const communityGrid = document.getElementById('communityGrid');
 const likedGrid = document.getElementById('likedGrid');
 const userModalInfo = document.getElementById('userModalInfo');
 const modalButtons = document.getElementById('modalButtons');
+const saveButton = document.getElementById('saveButton');
 
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
@@ -267,3 +268,32 @@ const likedUsers = async () => {
 		console.log(error);
 	}
 };
+
+const settings = async () => {
+	const form = {
+		id: localStorage.id,
+		name: accountName.value,
+		oldEmail: localStorage.email,
+		email: accountEmail.value,
+		location: accountLocation.value,
+		bio: accountBio.value,
+		password: accountPassword.value
+	};
+	try {
+		const updateSettings = await axios.post(`${baseURL}/settings`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		localStorage.setItem('name', accountName.value);
+		localStorage.setItem('email', accountEmail.value);
+		localStorage.setItem('password', accountPassword.value);
+		localStorage.setItem('location', accountLocation.value);
+		localStorage.setItem('bio', accountBio.value);
+		window.location.reload();
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+saveButton.addEventListener('click', settings);
