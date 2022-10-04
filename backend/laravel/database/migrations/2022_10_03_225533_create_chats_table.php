@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('liked', function (Blueprint $table) {
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('liking_user_id');
+        Schema::create('chats', function (Blueprint $table) {
+            $table->unsignedInteger('sender_user_id');
+            $table->unsignedInteger('sent_to_user_id');
+            $table->string('message');
+            $table->datetime('date');
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('sender_user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('liking_user_id')
+            $table->foreign('sent_to_user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
@@ -37,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('liked');
+        Schema::dropIfExists('chats');
     }
 };

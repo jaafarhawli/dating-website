@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
-            $table->unsignedInteger('sender_user_id');
-            $table->unsignedInteger('sent_to_user_id');
-            $table->string('message');
-            $table->datetime('date');
+        Schema::create('blocks', function (Blueprint $table) {
+            $table->unsignedInteger('blocking_user_id');
+            $table->unsignedInteger('blocked_user_id');
             $table->timestamps();
 
-            $table->foreign('sender_user_id')
+            $table->foreign('blocking_user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('sent_to_user_id')
+            $table->foreign('blocked_user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
@@ -39,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('blocks');
     }
 };

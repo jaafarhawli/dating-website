@@ -13,17 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blocked', function (Blueprint $table) {
-            $table->unsignedInteger('blocking_user_id');
-            $table->unsignedInteger('blocked_user_id');
+        Schema::create('likes', function (Blueprint $table) {
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('liking_user_id');
             $table->timestamps();
 
-            $table->foreign('blocking_user_id')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('blocked_user_id')
+            $table->foreign('liking_user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blocked');
+        Schema::dropIfExists('likes');
     }
 };
