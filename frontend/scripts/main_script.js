@@ -138,6 +138,26 @@ const viewCommunity = async () => {
 				</div>
 			</div>`;
 		});
+		const communityRest = await axios.post(`${baseURL}/show_rest`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		communityRest.data.data.forEach((farUser) => {
+			communityGrid.innerHTML += `
+			<div>
+				<div class="user flex column">
+					<div class="user-image-container">
+						<img src="${farUser.profile_url}" alt="">
+					</div>
+					<div class="user-content flex column">
+						<h2 class="username">${farUser.name}</h2>
+						<h3 class="user-location">${farUser.location}</h3>
+					</div>
+				</div>
+			</div>`;
+		});
+
 		// Community section slider
 		const communitySlider = tns({
 			container: '.community-grid',
