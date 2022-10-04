@@ -27,10 +27,12 @@ const accountGender = document.getElementById('gender');
 const accountPreferedGender = document.getElementById('preferedGender');
 
 const communityGrid = document.getElementById('communityGrid');
-const likedGrid = document.getElementById('likedGrid');
 const userModalInfo = document.getElementById('userModalInfo');
+const likedGrid = document.getElementById('likedGrid');
+const chatUsers = document.getElementById('chatUsers');
 const modalButtons = document.getElementById('modalButtons');
 const saveButton = document.getElementById('saveButton');
+const logoutButton = document.getElementById('logoutButton');
 
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
@@ -45,7 +47,7 @@ window.onload = () => {
 	accountLocation.value = localStorage.location;
 	viewCommunity();
 	likedUsers();
-	// console.log(localStorage.location);
+	viewChatUsers();
 };
 
 // Switch between pages
@@ -297,3 +299,32 @@ const settings = async () => {
 };
 
 saveButton.addEventListener('click', settings);
+
+const logout = () => {
+	localStorage.clear();
+	window.location.href = 'index.html';
+};
+
+logoutButton.addEventListener('click', logout);
+
+const viewChatUsers = async () => {
+	const form = {
+		user_id: localStorage.id
+	};
+	try {
+		const viewUsers = await axios.post(`${baseURL}/view_chat_users`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		viewUsers.data.data.forEach((user) => {
+			chatUsers.innerHTML += `
+			<div class="user-chat-element flex pointer" onclick="viewChat(${user.id})">
+                <img src="${user.profile_url}" alt="profile">
+                <h1>${user.name}</h1>
+            </div>`;
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};

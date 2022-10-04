@@ -5,37 +5,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApisController;
 use App\Http\Controllers\AuthController;
     
-    Route::group(["prefix"=> "v0.1"], function() {
-        
+Route::group(["prefix"=> "v0.1"], function() {
+    
     Route::post('login', [AuthController::class, "login"]);
+    
+    Route::post('logout', [AuthController::class, "logout"]);
     
     Route::post('register', [AuthController::class, "register"]);
     
     Route::group(["middleware" => "auth:api"], function() {
-
         Route::post("/show_nearby", [ApisController::class, "showNearby"]);
-
         Route::post("/show_rest", [ApisController::class, "showRest"]);
-
         Route::post("/show_user", [ApisController::class, "showUser"]);
-
         Route::post("/account_info", [ApisController::class, "accountInfo"]);
-
         Route::post("/like", [ApisController::class, "like"]);
-
         Route::post("/block", [ApisController::class, "block"]);
-
         Route::post("/view_likes", [ApisController::class, "viewLikes"]);
-
         Route::post("/view_chat_users", [ApisController::class, "viewChatUsers"]);
-
         Route::post("/view_chat", [ApisController::class, "viewChat"]);
-
         Route::post("/send_message", [ApisController::class, "sendMessage"]);
-
         Route::post("/settings", [ApisController::class, "settings"]);
-
     });
-
-});
-
+}); 
