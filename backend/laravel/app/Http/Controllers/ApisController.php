@@ -87,4 +87,18 @@ class ApisController extends Controller
             }
         }
     }
+
+    function viewLikes (Request $request) {
+        $liker_id = $request->input('user_id');
+        $users = User::select('users.id','users.name','users.location','users.profile_url')->join('likes', 'users.id', '=', 'likes.liking_user_id')->where('likes.user_id','=',$liker_id)->whereNotIn('users.id', function ($blocked) use($liker_id) {
+            $blocked->select("blocked_user_id")->from('blocks')->where('blocking_user_id',$liker_id);
+        })->whereNotIn('users.id', function($blockedBy) use($liker_id) {
+            $blockedBy->select("blocking_user_id")->from('blocks')->where('blocked_user_id',$liker_id);
+        })->get();
+
+        return response()->json([
+            "status" => "Success",
+            "data" => $users
+        ]);  
+    }
 }

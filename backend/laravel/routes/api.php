@@ -23,6 +23,8 @@ use App\Http\Controllers\AuthController;
 
         Route::post("/block", [ApisController::class, "block"]);
 
+        Route::post("/view_likes", [ApisController::class, "viewLikes"]);
+
     });
 
 });
