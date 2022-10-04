@@ -17,6 +17,25 @@ const chat = document.getElementById('chat');
 const account = document.getElementById('account');
 const footer = document.getElementById('footer');
 
+// Account Settings
+const accountName = document.getElementById('accountName');
+const accountEmail = document.getElementById('accountEmail');
+const accountPassword = document.getElementById('accountPassword');
+const accountLocation = document.getElementById('accountLocation');
+const accountBio = document.getElementById('accountBio');
+const accountGender = document.getElementById('gender');
+const accountPreferedGender = document.getElementById('preferedGender');
+
+window.onload = () => {
+	accountName.value = localStorage.name;
+	accountEmail.value = localStorage.email;
+	accountPassword.value = localStorage.password;
+	accountBio.value = localStorage.bio;
+	accountGender.value = localStorage.gender;
+	accountPreferedGender.value = localStorage.prefered_gender;
+	accountLocation.value = localStorage.location;
+};
+
 // Switch between pages
 // Home navbar element
 navHome.addEventListener('click', () => {

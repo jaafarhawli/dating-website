@@ -28,13 +28,14 @@ const login = async () => {
 			});
 			localStorage.setItem('token', res.data.acces_token);
 			localStorage.setItem('id', info.data.data[0].id);
-			localStorage.setItem('name', info.data.data[0].id);
-			localStorage.setItem('email', info.data.data[0].id);
-			localStorage.setItem('location', info.data.data[0].id);
-			localStorage.setItem('gender', info.data.data[0].id);
-			localStorage.setItem('prefered_gender', info.data.data[0].id);
-			localStorage.setItem('bio', info.data.data[0].id);
-			localStorage.setItem('profile_url', info.data.data[0].id);
+			localStorage.setItem('name', info.data.data[0].name);
+			localStorage.setItem('email', info.data.data[0].email);
+			localStorage.setItem('password', info.data.data[0].password);
+			localStorage.setItem('location', info.data.data[0].location);
+			localStorage.setItem('gender', info.data.data[0].gender);
+			localStorage.setItem('prefered_gender', info.data.data[0].prefered_gender);
+			localStorage.setItem('bio', info.data.data[0].bio);
+			localStorage.setItem('profile_url', info.data.data[0].profile_url);
 			window.location.href = 'main.html';
 		}
 	} catch (error) {

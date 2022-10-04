@@ -298,7 +298,6 @@
                     <div class="signup-gender flex column">
                         <label for="gender">Gender</label>
                         <select class="input" id="gender">
-                            <option value="" disabled="true" selected="true"></option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -306,7 +305,6 @@
                     <div class="signup-prefered-gender flex column">
                         <label for="preferedGender">Prefered Gender</label>
                         <select class="input" id="preferedGender">
-                            <option value="" disabled="true" selected="true"></option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
@@ -316,17 +314,17 @@
                 <label>Private Account</label><br>
                 <div class="private-account flex">
                     <div class="radio flex">
-                        <input type="radio" value="Yes" class="radio-button">
+                        <input type="radio" value="Yes" name="private" class="radio-button">
                         <p>Yes</p>
                     </div>
                     <div class="radio flex">
-                        <input type="radio" value="No"  class="radio-button">
+                        <input type="radio" value="No" name="private" class="radio-button" checked>
                         <p>No</p>
                     </div>
                 </div>
                 <!-- Password -->
-                <label for="">Password</label>
-                <input type="password" class="input round account-input-tab">
+                <label for="accountPassword">Password</label>
+                <input type="password" class="input round account-input-tab" id="accountPassword">
                 <!-- Save and logout buttons -->
                 <div class="flex">
                     <button type="button" class="logout-button button">Logout</button>
