@@ -26,6 +26,9 @@ const accountBio = document.getElementById('accountBio');
 const accountGender = document.getElementById('gender');
 const accountPreferedGender = document.getElementById('preferedGender');
 
+const privateYes = document.getElementById('privateYes');
+const privateNo = document.getElementById('privateNo');
+
 const communityGrid = document.getElementById('communityGrid');
 const userModalInfo = document.getElementById('userModalInfo');
 const likedGrid = document.getElementById('likedGrid');
@@ -47,9 +50,12 @@ window.onload = () => {
 	accountEmail.value = localStorage.email;
 	accountPassword.value = localStorage.password;
 	accountBio.value = localStorage.bio;
-	accountGender.value = localStorage.gender;
-	accountPreferedGender.value = localStorage.prefered_gender;
 	accountLocation.value = localStorage.location;
+	if (localStorage.private_account == 'no' || localStorage.private_account == 'No') {
+		privateNo.checked = true;
+	} else {
+		privateYes.checked = true;
+	}
 	viewCommunity();
 	likedUsers();
 	viewChatUsers();
@@ -277,6 +283,7 @@ const likedUsers = async () => {
 };
 
 const settings = async () => {
+	let accountPrivate = document.querySelector('input[name="private"]:checked');
 	const form = {
 		id: localStorage.id,
 		name: accountName.value,
@@ -284,7 +291,8 @@ const settings = async () => {
 		email: accountEmail.value,
 		location: accountLocation.value,
 		bio: accountBio.value,
-		password: accountPassword.value
+		password: accountPassword.value,
+		private: accountPrivate.value
 	};
 	try {
 		const updateSettings = await axios.post(`${baseURL}/settings`, form, {
@@ -297,6 +305,8 @@ const settings = async () => {
 		localStorage.setItem('password', accountPassword.value);
 		localStorage.setItem('location', accountLocation.value);
 		localStorage.setItem('bio', accountBio.value);
+		localStorage.setItem('private_account', accountPrivate.value);
+
 		window.location.reload();
 	} catch (error) {
 		console.log(error);

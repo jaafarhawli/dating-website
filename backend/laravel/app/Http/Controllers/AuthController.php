@@ -70,7 +70,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->location = $request->location;
         $user->gender = $request->gender;
-        $user->private_account = 'no';
+        $user->private_account = 'No';
         $user->prefered_gender = $request->prefered_gender;
         $user->password = bcrypt($request->password);
         $user->save();

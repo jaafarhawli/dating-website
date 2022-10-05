@@ -252,10 +252,11 @@ class ApisController extends Controller
         $newLocation = $request->input('location');
         $newBio = $request->input('bio');
         $newPassword =  bcrypt($request ->input('password'));
+        $privateAccount = $request->input('private');
         $email = User::where('email','=',$newEmail)->get();
         if($newEmail=='' || $newEmail==$oldEmail) {
             User::where('id',$id)
-            ->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'bio' => $newBio, 'password' => $newPassword]);
+            ->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio, 'password' => $newPassword]);
 
             return ["success" => "operation succeeded"];
         }
@@ -264,7 +265,7 @@ class ApisController extends Controller
         }
         else {
             User::where('id',$id)
-            ->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'bio' => $newBio, 'password' => $newPassword]);
+            ->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio, 'password' => $newPassword]);
 
             return ["success" => "operation succeeded"];
         }
