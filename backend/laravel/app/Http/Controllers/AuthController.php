@@ -71,6 +71,7 @@ class AuthController extends Controller
         $user->location = $request->location;
         $user->gender = $request->gender;
         $user->private_account = 'No';
+        $user->profile_url = '../backend/laravel/public/images/regular-profile.png';
         $user->prefered_gender = $request->prefered_gender;
         $user->password = bcrypt($request->password);
         $user->save();

@@ -62,6 +62,7 @@ window.onload = () => {
 	} else {
 		privateYes.checked = true;
 	}
+	profilePic.src = localStorage.profile_url;
 	viewCommunity();
 	likedUsers();
 	viewChatUsers();
@@ -309,6 +310,7 @@ const settings = async () => {
 		password: accountPassword.value,
 		private: accountPrivate.value
 	};
+	console.log(form);
 	try {
 		const updateSettings = await axios.post(`${baseURL}/settings`, form, {
 			headers: {
@@ -473,6 +475,7 @@ const uploadImage = async () => {
 		}
 	});
 	profilePic.src = updateImage.data.url;
+	localStorage.setItem('profile_url', updateImage.data.url);
 };
 
 profileImageInput.addEventListener('change', imageUploaded);
