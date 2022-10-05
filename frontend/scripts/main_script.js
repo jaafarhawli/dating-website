@@ -62,6 +62,7 @@ window.onload = () => {
 		privateYes.checked = true;
 	}
 	profilePic.src = localStorage.profile_url;
+	viewAll();
 	viewCommunity();
 	likedUsers();
 	viewChatUsers();
@@ -492,4 +493,35 @@ const updatePassword = async () => {
 			Authorization: `bearer ${localStorage.token}`
 		}
 	});
+};
+
+let notNullCommunityUsers = {};
+let nullCommunityUsers = [];
+const myLat = localStorage.latitude;
+const myLong = localStorage.longitude;
+
+const viewAll = async () => {
+	const form = {
+		preferedGender: localStorage.prefered_gender,
+		id: localStorage.id
+	};
+	try {
+		const communityUsers = await axios.post(`${baseURL}/show_all`, form, {
+			headers: {
+				Authorization: `bearer ${localStorage.token}`
+			}
+		});
+		// console.log(communityUsers.data.data[0].latitude == null);
+		communityUsers.data.data.forEach((user) => {
+			let userLatitude = user.latitude;
+			let userLongitude = user.longitude;
+			if (userLatitude == null || userLongitude == null) {
+				nullCommunityUsers.push(user.id);
+			} else {
+				notNullCommunityUsers[user.id] = Math.abs(user.latitude - myLat + (user.longitude - myLong));
+			}
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };

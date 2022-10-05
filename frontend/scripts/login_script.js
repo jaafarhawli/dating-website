@@ -37,6 +37,8 @@ const login = async () => {
 			localStorage.setItem('bio', info.data.data[0].bio);
 			localStorage.setItem('profile_url', info.data.data[0].profile_url);
 			localStorage.setItem('private_account', info.data.data[0].private_account);
+			localStorage.setItem('latitude', info.data.data[0].latitude);
+			localStorage.setItem('longitude', info.data.data[0].longitude);
 			window.location.href = 'main.html';
 		}
 	} catch (error) {
