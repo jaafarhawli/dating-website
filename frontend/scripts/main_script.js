@@ -73,7 +73,6 @@ window.onload = () => {
 	}
 	profilePic.src = localStorage.profile_url;
 	viewAll();
-	viewCommunity();
 	likedUsers();
 	viewChatUsers();
 };

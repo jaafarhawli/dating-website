@@ -670,6 +670,10 @@ ul {
 	width: 100%;
 }
 
+#liked {
+	min-height: 500px;
+}
+
 .liked-grid {
 	display: grid;
 	justify-content: center;
@@ -876,6 +880,13 @@ ul {
 }
 
 /* Media Queries */
+@media screen and (max-width: 1150px) {
+	.liked-grid {
+		grid-template-columns: auto auto;
+		column-gap: 50px;
+	}
+}
+
 @media screen and (max-width: 860px) {
 	.review-element-container {
 		width: 300px;
@@ -886,6 +897,12 @@ ul {
 	}
 	.hero-pic {
 		display: none;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	.liked-grid {
+		grid-template-columns: auto;
 	}
 }
 
