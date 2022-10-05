@@ -97,8 +97,10 @@ ul {
 .logo-container {
 	border-bottom-left-radius: 50%;
 	border-bottom-right-radius: 50%;
-	width: 150px;
-	height: 150px;
+	width: 10vw;
+	height: 10vw;
+	min-width: 120px;
+	min-height: 120px;
 	background: linear-gradient(to right, #ff5f40, #e74974);
 	justify-content: center;
 	align-items: center;
@@ -139,7 +141,7 @@ ul {
 }
 
 .hero-header {
-	font-size: 5rem;
+	font-size: clamp(50px, 8vw, 5rem);
 	color: white;
 	text-align: center;
 }
@@ -270,7 +272,8 @@ ul {
 /* Log in container */
 .login-container {
 	width: 60%;
-	height: 70%;
+	min-width: 615px;
+	height: 500px;
 }
 
 /* Log in banner */
@@ -278,6 +281,7 @@ ul {
 	justify-content: center;
 	height: 100%;
 	width: 40%;
+	min-width: 260px;
 	background: linear-gradient(rgb(255, 95, 64, 0.2), rgb(231, 73, 116, 0.2)),
 		linear-gradient(rgb(0, 0, 0, 0.5), rgb(0, 0, 0, 0.5)), url(../images/pexels-ariel-paredes-2247858.jpg);
 	background-size: cover;
@@ -343,6 +347,7 @@ ul {
 .signup-prefered-gender,
 .signup-gender {
 	width: 45%;
+	justify-content: space-between;
 }
 
 /* Main Page */
@@ -864,4 +869,21 @@ ul {
 
 .radio-button {
 	margin-bottom: 0 !important;
+}
+
+/* Media Queries */
+@media screen and (max-width: 860px) {
+	.review-element-container {
+		width: 300px;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.login-container {
+		justify-content: center;
+	}
+
+	.login-banner {
+		display: none;
+	}
 }

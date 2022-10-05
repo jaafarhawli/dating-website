@@ -23,7 +23,17 @@ const slider = tns({
 	autoplay: true,
 	autoplayButtonOutput: false,
 	autoplayTimeout: 3000,
-	items: 3
+	responsive: {
+		960: {
+			items: 3
+		},
+		650: {
+			items: 2
+		},
+		200: {
+			items: 1
+		}
+	}
 });
 
 loginButton.addEventListener('click', () => {
