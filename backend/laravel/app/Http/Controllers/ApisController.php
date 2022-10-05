@@ -271,12 +271,11 @@ class ApisController extends Controller
         $newEmail = $request->input('email');
         $newLocation = $request->input('location');
         $newBio = $request->input('bio');
-        $newPassword =  bcrypt($request ->input('password'));
         $privateAccount = $request->input('private');
         $email = User::where('email','=',$newEmail)->get();
         if($newEmail=='' || $newEmail==$oldEmail) {
             User::where('id',$id)
-            ->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio, 'password' => $newPassword]);
+            ->update(['name' => $newName, 'email' => $oldEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio]);
 
             return ["success" => "operation succeeded"];
         }
@@ -285,10 +284,21 @@ class ApisController extends Controller
         }
         else {
             User::where('id',$id)
-            ->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio, 'password' => $newPassword]);
+            ->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio]);
             
             return ["success" => "operation succeeded"];
         }
+    }
+
+    function updatePassword(Request $request) {
+        $id = $request->input('id');
+        $password = $request->input('password');
+        $hashed = bcrypt($password);
+
+        User::where('id', $id)
+        ->update(['password'=>$hashed]);
+        
+        return ["success" => "operation succeeded"];
     }
 
     function updateProfile(Request $request) {

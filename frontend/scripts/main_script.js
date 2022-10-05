@@ -54,7 +54,6 @@ const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 window.onload = () => {
 	accountName.value = localStorage.name;
 	accountEmail.value = localStorage.email;
-	accountPassword.value = localStorage.password;
 	accountBio.value = localStorage.bio;
 	accountLocation.value = localStorage.location;
 	if (localStorage.private_account == 'no' || localStorage.private_account == 'No') {
@@ -307,10 +306,8 @@ const settings = async () => {
 		email: accountEmail.value,
 		location: accountLocation.value,
 		bio: accountBio.value,
-		password: accountPassword.value,
 		private: accountPrivate.value
 	};
-	console.log(form);
 	try {
 		const updateSettings = await axios.post(`${baseURL}/settings`, form, {
 			headers: {
@@ -321,14 +318,16 @@ const settings = async () => {
 			uploadImage();
 			imageChanged = false;
 		}
+
+		if (accountPassword.value.length >= 8) {
+			console.log(accountPassword.value.length);
+			updatePassword();
+		}
 		localStorage.setItem('name', accountName.value);
 		localStorage.setItem('email', accountEmail.value);
-		localStorage.setItem('password', accountPassword.value);
 		localStorage.setItem('location', accountLocation.value);
 		localStorage.setItem('bio', accountBio.value);
 		localStorage.setItem('private_account', accountPrivate.value);
-
-		// window.location.reload();
 	} catch (error) {
 		console.log(error);
 	}
@@ -464,7 +463,6 @@ function imageUploaded() {
 }
 
 const uploadImage = async () => {
-	console.log('hi');
 	let form = {
 		profilePicture: base64String,
 		id: localStorage.id
@@ -479,3 +477,16 @@ const uploadImage = async () => {
 };
 
 profileImageInput.addEventListener('change', imageUploaded);
+
+const updatePassword = async () => {
+	console.log('hi');
+	let form = {
+		id: localStorage.id,
+		password: accountPassword.value
+	};
+	const updatePassword = await axios.post(`${baseURL}/update_password`, form, {
+		headers: {
+			Authorization: `bearer ${localStorage.token}`
+		}
+	});
+};

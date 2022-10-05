@@ -26,5 +26,6 @@ Route::group(["prefix"=> "v0.1"], function() {
         Route::post("/send_message", [ApisController::class, "sendMessage"]);
         Route::post("/settings", [ApisController::class, "settings"]);
         Route::post("/update_profile", [ApisController::class, "updateProfile"]);
+        Route::post("/update_password", [ApisController::class, "updatePassword"]);
     });
 }); 

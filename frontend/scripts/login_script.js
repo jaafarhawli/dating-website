@@ -31,7 +31,6 @@ const login = async () => {
 			localStorage.setItem('id', info.data.data[0].id);
 			localStorage.setItem('name', info.data.data[0].name);
 			localStorage.setItem('email', info.data.data[0].email);
-			localStorage.setItem('password', info.data.data[0].password);
 			localStorage.setItem('location', info.data.data[0].location);
 			localStorage.setItem('gender', info.data.data[0].gender);
 			localStorage.setItem('prefered_gender', info.data.data[0].prefered_gender);
