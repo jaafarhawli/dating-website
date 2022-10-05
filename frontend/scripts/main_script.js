@@ -53,7 +53,7 @@ const nullCommunityUsers = [];
 const myLat = localStorage.latitude;
 const myLong = localStorage.longitude;
 
-const baseURL = 'http://127.0.0.1:8000/api/v0.1';
+const baseURL = 'http://127.0.0.1:8000/api/v1';
 
 // Default values in account settings
 window.onload = () => {
@@ -149,11 +149,14 @@ const viewAll = async () => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		// Get latitude and longitude of each user in the community users and calculate the distance with the logged in user, then display the users from the nearest to the farthest, users that have no geolocation will be displayed the last
 		communityUsers.data.data.forEach((user) => {
 			let userLatitude = user.latitude;
 			let userLongitude = user.longitude;
+			// If geolocation attributes are missing, add to null users array with the info needed to display the user
 			if (userLatitude == null || userLongitude == null) {
 				nullCommunityUsers.push([ user.id, user.profile_url, user.name, user.location ]);
+				// Else calculate the distance and add it to the not null users array with the info needed to display the user
 			} else {
 				notNullCommunityUsers.push([
 					Math.abs(user.latitude - myLat + (user.longitude - myLong)),
@@ -164,13 +167,15 @@ const viewAll = async () => {
 				]);
 			}
 		});
+		// Sort the not null users array based on geolocation
 		notNullCommunityUsers.sort(function(a, b) {
 			return a[0] - b[0];
 		});
+		// Display users with known geolocation attributes first in order of distance
 		notNullCommunityUsers.forEach((account) => {
 			communityGrid.innerHTML += `
 		 	<div>
-		 		<div class="user flex column" onclick="showUser(${account[1]})">
+		 		<div class="user flex column pointer" onclick="showUser(${account[1]})">
 		 			<div class="user-image-container">
 		 				<img src="${account[2]}" alt="">
 		 			</div>
@@ -181,10 +186,11 @@ const viewAll = async () => {
 		 		</div>
 		 	</div>`;
 		});
+		// Display the users with null geolocation attributes randomly after
 		nullCommunityUsers.forEach((nullAccount) => {
 			communityGrid.innerHTML += `
 		 	<div>
-		 		<div class="user flex column" onclick="showUser(${nullAccount[0]})">
+		 		<div class="user flex column pointer" onclick="showUser(${nullAccount[0]})">
 		 			<div class="user-image-container">
 		 				<img src="${nullAccount[1]}" alt="">
 		 			</div>
@@ -195,11 +201,13 @@ const viewAll = async () => {
 		 		</div>
 		 	</div>`;
 		});
+		// Add a slider
 		const communitySlider = tns({
 			container: '.community-grid',
 			slideBy: 1,
 			speed: 400,
 			nav: false,
+			mouseDrag: true,
 			controlsContainer: '#SwipeControls',
 			prevButton: '.right',
 			nextButton: '.left',
@@ -294,7 +302,7 @@ const likedUsers = async () => {
 		viewLiked.data.data.forEach((user) => {
 			likedGrid.innerHTML += `
 			<div>
-				<div class="user flex column" onclick="showUser(${user.id})">
+				<div class="user flex column pointer" onclick="showUser(${user.id})">
 					<div class="user-image-container">
 						<img src="${user.profile_url}" alt="">
 					</div>

@@ -6,7 +6,7 @@ const gender = document.getElementById('gender');
 const userLocation = document.getElementById('location');
 const preferedGender = document.getElementById('preferedGender');
 const signupPageButton = document.getElementById('signupPageButton');
-const signupUrl = 'http://127.0.0.1:8000/api/v0.1/register';
+const signupUrl = 'http://127.0.0.1:8000/api/v1/register';
 
 let latitudeVal;
 let longitudeVal;

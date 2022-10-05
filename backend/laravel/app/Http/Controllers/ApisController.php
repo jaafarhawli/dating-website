@@ -10,6 +10,7 @@ use App\Models\Chat;
 
 class ApisController extends Controller
 {   
+    // Show all users that that have the prefered gender of the logged in user and aren't blocking/blocked by him and are not private
     function showAll(Request $request) {
         $prefered = $request->input('preferedGender');
         $id = $request->input('id');
@@ -43,67 +44,6 @@ class ApisController extends Controller
         ]);
     }
 
-
-    // Show users in the same location as the logged in user, blocked/blocking users and private accounts won't be shown
-    function showNearby(Request $request) {
-        $loc = $request->input('location');
-        $prefered = $request->input('preferedGender');
-        $id = $request->input('id');
-
-        $users = User::where(["location" => $loc,"gender" => $prefered])
-        ->whereNotIn('id', function ($blocked) use($id) {
-            $blocked->select("blocked_user_id")
-            ->from('blocks')
-            ->where('blocking_user_id',$id);
-        })
-        ->whereNotIn('id', function($blockedBy) use($id) {
-            $blockedBy->select("blocking_user_id")
-            ->from('blocks')
-            ->where('blocked_user_id',$id);
-        })
-        ->whereNotIn('id', function($private) {
-            $private->select('id')
-            ->from('users')
-            ->where('private_account', '=', 'Yes');
-        })
-        ->get();
-
-        return response()->json([
-            "status" => "Success",
-            "data" => $users
-        ]);     
-    }
-
-    // Show the other users that are not in the same location as the logged in user
-    function showRest(Request $request) {
-        $loc = $request->input('location');
-        $prefered = $request->input('preferedGender');
-        $id = $request->input('id');
-
-        $users= User::where("location","!=",$loc)
-        ->where("gender","=",$prefered)
-        ->whereNotIn('id', function ($blocked) use($id) {
-            $blocked->select("blocked_user_id")
-            ->from('blocks')
-            ->where('blocking_user_id',$id);
-        })
-        ->whereNotIn('id', function($blockedBy) use($id) {
-            $blockedBy->select("blocking_user_id")
-            ->from('blocks')
-            ->where('blocked_user_id',$id);
-        })
-        ->whereNotIn('id', function($private) {
-            $private->select('id')
-            ->from('users')
-            ->where('private_account', '=', 'Yes');
-        })
-        ->get();
-
-        return response()->json([
-            "status" => "Success",
-            "data" => $users
-        ]);    
-    }
 
     // Return user info from user id to display in user modal
     function showUser(Request $id) {
