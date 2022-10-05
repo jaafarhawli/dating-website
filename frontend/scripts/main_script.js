@@ -317,6 +317,7 @@ saveButton.addEventListener('click', settings);
 
 const logout = () => {
 	localStorage.clear();
+	window.location.reload();
 	window.location.href = 'index.html';
 };
 
