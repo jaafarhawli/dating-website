@@ -13,6 +13,7 @@ loginLink.addEventListener('click', () => {
 	window.location.href = 'login.html';
 });
 
+// Register
 const register = async () => {
 	const form = {
 		name: username.value,

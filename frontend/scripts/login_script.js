@@ -10,6 +10,7 @@ signupLink.addEventListener('click', () => {
 	window.location.href = 'signup.html';
 });
 
+// login
 const login = async () => {
 	const form = {
 		email: email.value,

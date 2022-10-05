@@ -118,12 +118,14 @@ accountButton.addEventListener('click', () => {
 	navHome.classList.remove('current');
 });
 
+// Quit modal
 userQuit.addEventListener('click', () => {
 	userModal.close();
 	document.body.style.overflow = 'auto';
 	document.body.style.userSelect = 'auto';
 });
 
+// View community users on page load, users from the same location will show up first
 const viewCommunity = async () => {
 	const form = {
 		location: localStorage.location,
@@ -136,6 +138,7 @@ const viewCommunity = async () => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		// First show the users from the same location
 		communityNearby.data.data.forEach((user) => {
 			communityGrid.innerHTML += `
 			<div>
@@ -155,6 +158,7 @@ const viewCommunity = async () => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		// Then show the rest of the users
 		communityRest.data.data.forEach((farUser) => {
 			communityGrid.innerHTML += `
 			<div>
@@ -187,6 +191,7 @@ const viewCommunity = async () => {
 	}
 };
 
+// Show user modal when user is clicked
 const showUser = async (userId) => {
 	const id = { id: userId };
 	try {
@@ -219,6 +224,7 @@ const showUser = async (userId) => {
 	}
 };
 
+// Add user to liked list
 const like = async (id) => {
 	const form = {
 		user_id: localStorage.id,
@@ -236,6 +242,7 @@ const like = async (id) => {
 	}
 };
 
+// Add user to blocked list
 const block = async (id) => {
 	const form = {
 		blocking_user_id: localStorage.id,
@@ -253,6 +260,7 @@ const block = async (id) => {
 	}
 };
 
+// View liked users list
 const likedUsers = async () => {
 	const form = {
 		user_id: localStorage.id
@@ -282,6 +290,7 @@ const likedUsers = async () => {
 	}
 };
 
+// Save new profile attributes in the database and update local storage
 const settings = async () => {
 	let accountPrivate = document.querySelector('input[name="private"]:checked');
 	const form = {
@@ -315,6 +324,7 @@ const settings = async () => {
 
 saveButton.addEventListener('click', settings);
 
+// Logout, clear local storage and reload to the landing page
 const logout = () => {
 	localStorage.clear();
 	window.location.reload();
@@ -323,6 +333,7 @@ const logout = () => {
 
 logoutButton.addEventListener('click', logout);
 
+// View all users that the current user had sent to or received any message from (except users blocking current user or blocked by him)
 const viewChatUsers = async () => {
 	const form = {
 		user_id: localStorage.id
@@ -345,6 +356,7 @@ const viewChatUsers = async () => {
 	}
 };
 
+// View chat with the selected user
 const viewChat = async (id) => {
 	currentUser = id;
 	chatContainer.innerHTML = '';
@@ -380,6 +392,7 @@ const viewChat = async (id) => {
 	}
 };
 
+// Send message to selected user
 const sendMessage = async () => {
 	const form = {
 		user_id: localStorage.id,
@@ -407,6 +420,7 @@ chatInput.addEventListener('keypress', (e) => {
 	}
 });
 
+// When text button inside user modal is clicked, go to chat page and open chat with that user
 const message = (id) => {
 	viewChat(id);
 	userModal.close();
