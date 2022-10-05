@@ -455,4 +455,18 @@ function imageUploaded() {
 	reader.readAsDataURL(file);
 }
 
+const uploadImage = async () => {
+	let form = {
+		profilePicture: base64String,
+		id: localStorage.id
+	};
+	const updateImage = await axios.post(`${baseURL}/update_profile`, form, {
+		headers: {
+			Authorization: `bearer ${localStorage.token}`
+		}
+	});
+	profilePic.src = updateImage.data.url;
+};
+
+profileImageInput.addEventListener('change', imageUploaded);
 submitImg.addEventListener('click', uploadImage);
