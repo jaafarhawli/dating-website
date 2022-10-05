@@ -450,6 +450,7 @@ const message = (id) => {
 	navHome.classList.remove('current');
 };
 
+// Save base64 value of the new uploaded profile
 function imageUploaded() {
 	const file = document.querySelector('input[type=file]')['files'][0];
 
@@ -462,6 +463,7 @@ function imageUploaded() {
 	imageChanged = true;
 }
 
+// Upload the new profile to the database and add it to local storage
 const uploadImage = async () => {
 	let form = {
 		profilePicture: base64String,
@@ -478,6 +480,7 @@ const uploadImage = async () => {
 
 profileImageInput.addEventListener('change', imageUploaded);
 
+// Update the password when user inserts a new password with length greater than or equal to 8 characters
 const updatePassword = async () => {
 	console.log('hi');
 	let form = {
