@@ -48,6 +48,11 @@ const profilePic = document.getElementById('profilePic');
 let base64String = '';
 let imageChanged = false;
 
+const notNullCommunityUsers = [];
+const nullCommunityUsers = [];
+const myLat = localStorage.latitude;
+const myLong = localStorage.longitude;
+
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
 // Default values in account settings
@@ -132,56 +137,64 @@ userQuit.addEventListener('click', () => {
 	document.body.style.userSelect = 'auto';
 });
 
-// View community users on page load, users from the same location will show up first
-const viewCommunity = async () => {
+// View community users on page load, users will be shown from the nearest to the farthest based on geolocation
+const viewAll = async () => {
 	const form = {
-		location: localStorage.location,
 		preferedGender: localStorage.prefered_gender,
 		id: localStorage.id
 	};
 	try {
-		const communityNearby = await axios.post(`${baseURL}/show_nearby`, form, {
+		const communityUsers = await axios.post(`${baseURL}/show_all`, form, {
 			headers: {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
-		// First show the users from the same location
-		communityNearby.data.data.forEach((user) => {
-			communityGrid.innerHTML += `
-			<div>
-				<div class="user flex column" onclick="showUser(${user.id})">
-					<div class="user-image-container">
-						<img src="${user.profile_url}" alt="">
-					</div>
-					<div class="user-content flex column">
-						<h2 class="username">${user.name}</h2>
-						<h3 class="user-location">${user.location}</h3>
-					</div>
-				</div>
-			</div>`;
-		});
-		const communityRest = await axios.post(`${baseURL}/show_rest`, form, {
-			headers: {
-				Authorization: `bearer ${localStorage.token}`
+		communityUsers.data.data.forEach((user) => {
+			let userLatitude = user.latitude;
+			let userLongitude = user.longitude;
+			if (userLatitude == null || userLongitude == null) {
+				nullCommunityUsers.push([ user.id, user.profile_url, user.name, user.location ]);
+			} else {
+				notNullCommunityUsers.push([
+					Math.abs(user.latitude - myLat + (user.longitude - myLong)),
+					user.id,
+					user.profile_url,
+					user.name,
+					user.location
+				]);
 			}
 		});
-		// Then show the rest of the users
-		communityRest.data.data.forEach((farUser) => {
-			communityGrid.innerHTML += `
-			<div>
-				<div class="user flex column" onclick="showUser(${farUser.id})">
-					<div class="user-image-container">
-						<img src="${farUser.profile_url}" alt="">
-					</div>
-					<div class="user-content flex column">
-						<h2 class="username">${farUser.name}</h2>
-						<h3 class="user-location">${farUser.location}</h3>
-					</div>
-				</div>
-			</div>`;
+		notNullCommunityUsers.sort(function(a, b) {
+			return a[0] - b[0];
 		});
-
-		// Community section slider
+		notNullCommunityUsers.forEach((account) => {
+			communityGrid.innerHTML += `
+		 	<div>
+		 		<div class="user flex column" onclick="showUser(${account[1]})">
+		 			<div class="user-image-container">
+		 				<img src="${account[2]}" alt="">
+		 			</div>
+		 			<div class="user-content flex column">
+		 				<h2 class="username">${account[3]}</h2>
+		 				<h3 class="user-location">${account[4]}</h3>
+		 			</div>
+		 		</div>
+		 	</div>`;
+		});
+		nullCommunityUsers.forEach((nullAccount) => {
+			communityGrid.innerHTML += `
+		 	<div>
+		 		<div class="user flex column" onclick="showUser(${nullAccount[0]})">
+		 			<div class="user-image-container">
+		 				<img src="${nullAccount[1]}" alt="">
+		 			</div>
+		 			<div class="user-content flex column">
+		 				<h2 class="username">${nullAccount[2]}</h2>
+		 				<h3 class="user-location">${nullAccount[3]}</h3>
+		 			</div>
+		 		</div>
+		 	</div>`;
+		});
 		const communitySlider = tns({
 			container: '.community-grid',
 			slideBy: 1,
@@ -493,38 +506,4 @@ const updatePassword = async () => {
 			Authorization: `bearer ${localStorage.token}`
 		}
 	});
-};
-
-let notNullCommunityUsers = [];
-let nullCommunityUsers = [];
-const myLat = localStorage.latitude;
-const myLong = localStorage.longitude;
-
-const viewAll = async () => {
-	const form = {
-		preferedGender: localStorage.prefered_gender,
-		id: localStorage.id
-	};
-	try {
-		const communityUsers = await axios.post(`${baseURL}/show_all`, form, {
-			headers: {
-				Authorization: `bearer ${localStorage.token}`
-			}
-		});
-		// console.log(communityUsers.data.data[0].latitude == null);
-		communityUsers.data.data.forEach((user) => {
-			let userLatitude = user.latitude;
-			let userLongitude = user.longitude;
-			if (userLatitude == null || userLongitude == null) {
-				nullCommunityUsers.push(user.id);
-			} else {
-				notNullCommunityUsers.push([ user.id, Math.abs(user.latitude - myLat + (user.longitude - myLong)) ]);
-			}
-		});
-		notNullCommunityUsers.sort(function(a, b) {
-			return a[1] - b[1];
-		});
-	} catch (error) {
-		console.log(error);
-	}
 };
