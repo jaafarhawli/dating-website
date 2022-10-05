@@ -318,12 +318,14 @@ ul {
 .login-password,
 .login-email {
 	width: 100%;
+	max-width: 300px;
 }
 
 /* Forms buttons */
 .signup-page-button,
 .login-page-button {
 	width: 100%;
+	max-width: 300px;
 	margin-top: 20px;
 }
 
@@ -341,6 +343,7 @@ ul {
 /* Gender select and prefered gender container */
 .gender-select {
 	width: 100%;
+	max-width: 300px;
 	justify-content: space-between;
 }
 
@@ -401,8 +404,9 @@ ul {
 }
 
 .main-hero-header {
-	font-size: 4rem;
+	font-size: clamp(50px, 6vw, 4rem);
 	color: black;
+	z-index: 100;
 }
 
 .hero-pic {
@@ -876,14 +880,63 @@ ul {
 	.review-element-container {
 		width: 300px;
 	}
+
+	.padding {
+		padding: 0 20px;
+	}
+	.hero-pic {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 650px) {
 	.login-container {
 		justify-content: center;
+		width: 100% !important;
 	}
 
 	.login-banner {
 		display: none;
 	}
+
+	.login-section {
+		overflow-x: hidden;
+	}
+
+	.nav-elements {
+		display: none;
+		flex-direction: column;
+		gap: 10px;
+		align-self: center;
+	}
+
+	/* .main-navbar {
+		align-items: center;
+	} */
+
+	.hamburger {
+		display: block !important;
+		color: black;
+	}
+}
+
+@media screen and (min-width: 800px) {
+	.hero-content-container-main {
+		max-width: 900px;
+	}
+}
+
+.nav-elements.active {
+	display: flex;
+}
+
+.main-hero-header.active {
+	position: absolute;
+	top: 300px;
+}
+
+.main-navbar.active {
+	flex-direction: column-reverse;
+	align-items: flex-end;
+	gap: 10px;
 }

@@ -53,6 +53,11 @@ const nullCommunityUsers = [];
 const myLat = localStorage.latitude;
 const myLong = localStorage.longitude;
 
+const hamburger = document.querySelector('.hamburger');
+const navItems = document.querySelector('.nav-elements');
+const mainHeroHeader = document.querySelector('.main-hero-header');
+const mainNav = document.querySelector('.main-navbar');
+
 const baseURL = 'http://127.0.0.1:8000/api/v1';
 
 // Default values in account settings
@@ -212,7 +217,17 @@ const viewAll = async () => {
 			prevButton: '.right',
 			nextButton: '.left',
 			gutter: 10,
-			items: 3
+			responsive: {
+				1150: {
+					items: 3
+				},
+				750: {
+					items: 2
+				},
+				200: {
+					items: 1
+				}
+			}
 		});
 	} catch (error) {
 		console.log(error);
@@ -515,3 +530,9 @@ const updatePassword = async () => {
 		}
 	});
 };
+
+hamburger.addEventListener('click', () => {
+	navItems.classList.toggle('active');
+	mainNav.classList.toggle('active');
+	mainHeroHeader.classList.toggle('active');
+});
