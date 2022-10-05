@@ -823,11 +823,18 @@ ul {
 	margin-top: 20px;
 	gap: 5vw;
 }
+.account-buttons {
+	gap: 20px;
+}
 
 .profile-picture {
 	display: block;
-	width: 350px;
-	height: 350px;
+	height: 30vw;
+	width: 30vw;
+	max-width: 350px;
+	max-height: 350px;
+	min-width: 300px;
+	min-height: 300px;
 	border-radius: 10px;
 	object-fit: cover;
 }
@@ -862,6 +869,7 @@ ul {
 
 .account-input-tab {
 	width: 25vw !important;
+	min-width: 300px !important;
 }
 
 .radio {
@@ -903,6 +911,11 @@ ul {
 @media screen and (max-width: 700px) {
 	.liked-grid {
 		grid-template-columns: auto;
+	}
+
+	.account-page {
+		flex-direction: column;
+		align-items: center;
 	}
 }
 
