@@ -286,8 +286,46 @@ class ApisController extends Controller
         else {
             User::where('id',$id)
             ->update(['name' => $newName, 'email' => $newEmail, 'location' => $newLocation, 'private_account' => $privateAccount, 'bio' => $newBio, 'password' => $newPassword]);
-
+            
             return ["success" => "operation succeeded"];
         }
     }
-} 
+
+    function updateProfile(Request $request) {
+        $base64Image = $request->input('profilePicture');
+        $user = $request->input('id');
+    
+        $dir = $_SERVER['DOCUMENT_ROOT'] . "/images/" . $user;
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+    
+        $base64String = explode(",", $base64Image)[1];
+         // $imageExtention is the original extendtion of the image
+        $extra1 = explode(",", $base64Image)[0];
+        $extra2 = explode(";", $extra1)[0];
+        $imageExtention = explode("/", $extra2)[1];
+         
+         // The path to save the image in
+         $imageName = $dir . "/" . uniqid('') . "." . $imageExtention;
+         // $data is the Data of the image after decoding
+         $data = base64_decode($base64String);
+         // Bind the decoded data to an image
+         $success = file_put_contents($imageName, $data);
+         $url = str_replace("P:/Programs/XAMPP/htdocs", "http://localhost", $imageName);
+         
+         User::where('id', '=', $user)->update(['profile_url' => $url]);
+    
+        return response()->json([
+            "status" => "Success",
+            "url" => $url
+        ]);  
+    } 
+}
+        
+    
+
+
+
+
+    

@@ -25,5 +25,6 @@ Route::group(["prefix"=> "v0.1"], function() {
         Route::post("/view_chat", [ApisController::class, "viewChat"]);
         Route::post("/send_message", [ApisController::class, "sendMessage"]);
         Route::post("/settings", [ApisController::class, "settings"]);
+        Route::post("/update_profile", [ApisController::class, "updateProfile"]);
     });
 }); 
