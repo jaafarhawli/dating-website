@@ -63,6 +63,8 @@ class AuthController extends Controller
             "location" => "required",
             "gender" => "required",
             "prefered_gender" => "required",
+            "latitude" => "nullable",
+            "longitude" => "nullable"
         ]);
         // create user data + save
         $user = new User();
@@ -74,6 +76,8 @@ class AuthController extends Controller
         $user->profile_url = '../backend/laravel/public/images/regular-profile.png';
         $user->prefered_gender = $request->prefered_gender;
         $user->password = bcrypt($request->password);
+        $user->latitude = $request->latitude;
+        $user->longitude = $request->longitude;
         $user->save();
         // send response
         return response()->json([
