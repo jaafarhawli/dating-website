@@ -495,7 +495,7 @@ const updatePassword = async () => {
 	});
 };
 
-let notNullCommunityUsers = {};
+let notNullCommunityUsers = [];
 let nullCommunityUsers = [];
 const myLat = localStorage.latitude;
 const myLong = localStorage.longitude;
@@ -518,8 +518,11 @@ const viewAll = async () => {
 			if (userLatitude == null || userLongitude == null) {
 				nullCommunityUsers.push(user.id);
 			} else {
-				notNullCommunityUsers[user.id] = Math.abs(user.latitude - myLat + (user.longitude - myLong));
+				notNullCommunityUsers.push([ user.id, Math.abs(user.latitude - myLat + (user.longitude - myLong)) ]);
 			}
+		});
+		notNullCommunityUsers.sort(function(a, b) {
+			return a[1] - b[1];
 		});
 	} catch (error) {
 		console.log(error);
