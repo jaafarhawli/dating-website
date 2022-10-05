@@ -16,6 +16,7 @@ Route::group(["prefix"=> "v0.1"], function() {
     Route::group(["middleware" => "auth:api"], function() {
         Route::post("/show_nearby", [ApisController::class, "showNearby"]);
         Route::post("/show_rest", [ApisController::class, "showRest"]);
+        Route::post("/show_all", [ApisController::class, "showAll"]);
         Route::post("/show_user", [ApisController::class, "showUser"]);
         Route::post("/account_info", [ApisController::class, "accountInfo"]);
         Route::post("/like", [ApisController::class, "like"]);

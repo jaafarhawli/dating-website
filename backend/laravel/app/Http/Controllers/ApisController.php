@@ -10,6 +10,40 @@ use App\Models\Chat;
 
 class ApisController extends Controller
 {   
+    function showAll(Request $request) {
+        $prefered = $request->input('preferedGender');
+        $id = $request->input('id');
+
+        $users = User::where(["gender" => $prefered])
+        ->whereNotIn('id', function ($blocked) use($id) {
+            $blocked->select("blocked_user_id")
+            ->from('blocks')
+            ->where('blocking_user_id',$id);
+        })
+        ->whereNotIn('id', function($blockedBy) use($id) {
+            $blockedBy->select("blocking_user_id")
+            ->from('blocks')
+            ->where('blocked_user_id',$id);
+        })
+        ->whereNotIn('id', function($private) {
+            $private->select('id')
+            ->from('users')
+            ->where('private_account', '=', 'Yes');
+        })
+        ->whereNotIn('id', function($private) use($id) {
+            $private->select('id')
+            ->from('users')
+            ->where('id', '=', $id);
+        })
+        ->get();
+
+        return response()->json([
+            "status" => "Success",
+            "data" => $users
+        ]);
+    }
+
+
     // Show users in the same location as the logged in user, blocked/blocking users and private accounts won't be shown
     function showNearby(Request $request) {
         $loc = $request->input('location');
@@ -297,7 +331,7 @@ class ApisController extends Controller
 
         User::where('id', $id)
         ->update(['password'=>$hashed]);
-        
+
         return ["success" => "operation succeeded"];
     }
 
