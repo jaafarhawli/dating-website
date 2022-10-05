@@ -887,6 +887,31 @@ ul {
 	margin-bottom: 0 !important;
 }
 
+.account-pic-container {
+	position: relative;
+	height: fit-content;
+}
+
+.input-image {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -45px;
+	margin-left: -45px;
+	border-radius: 50%;
+	transition: 300ms;
+}
+
+.input-image:hover {
+	background-color: rgb(0, 0, 0, 0.5);
+}
+
+.camera {
+	width: 90px;
+	padding: 20px;
+	opacity: 0.4;
+}
+
 /* Media Queries */
 @media screen and (max-width: 1150px) {
 	.liked-grid {
