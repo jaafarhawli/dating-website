@@ -8,20 +8,39 @@ const preferedGender = document.getElementById('preferedGender');
 const signupPageButton = document.getElementById('signupPageButton');
 const signupUrl = 'http://127.0.0.1:8000/api/v0.1/register';
 
+let latitudeVal;
+let longitudeVal;
+
 // Display log in form
 loginLink.addEventListener('click', () => {
 	window.location.href = 'login.html';
 });
 
+function getLocation() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(savePosition);
+	} else {
+		x.innerHTML = 'Geolocation is not supported by this browser.';
+	}
+}
+
+function savePosition(position) {
+	latitudeVal = position.coords.latitude;
+	longitudeVal = position.coords.longitude;
+}
+
 // Register
 const register = async () => {
+	getLocation();
 	const form = {
 		name: username.value,
 		email: email.value,
 		password: password.value,
 		location: userLocation.value,
 		gender: gender.value,
-		prefered_gender: preferedGender.value
+		prefered_gender: preferedGender.value,
+		latitude: latitudeVal,
+		longitude: longitudeVal
 	};
 	try {
 		await axios.post(signupUrl, form);
