@@ -10,6 +10,7 @@ use App\Models\Chat;
 
 class ApisController extends Controller
 {   
+    // Show users in the same location as the logged in user, blocked/blocking users and private accounts won't be shown
     function showNearby(Request $request) {
         $loc = $request->input('location');
         $prefered = $request->input('preferedGender');
@@ -39,6 +40,7 @@ class ApisController extends Controller
         ]);     
     }
 
+    // Show the other users that are not in the same location as the logged in user
     function showRest(Request $request) {
         $loc = $request->input('location');
         $prefered = $request->input('preferedGender');
@@ -69,6 +71,7 @@ class ApisController extends Controller
         ]);    
     }
 
+    // Return user info from user id to display in user modal
     function showUser(Request $id) {
         $user_id = $id->input('id');
         $data = User::select("id","name","location","gender","prefered_gender","bio","profile_url")
@@ -81,6 +84,7 @@ class ApisController extends Controller
         ]);
     }
 
+    // Return account info from email
     function accountInfo(Request $request) {
         $email = $request->input('email');
 
@@ -93,6 +97,7 @@ class ApisController extends Controller
         ]);
     }
 
+    // Add user to liked list
     function like(Request $request) {
         $liker_id = $request->input('user_id');
         $liked_id = $request->input('liking_user_id');
@@ -116,6 +121,7 @@ class ApisController extends Controller
         }
     }
 
+    // Add user to blocked list
     function block(Request $request) {
         $blocker_id = $request->input('blocking_user_id');
         $blocked_id = $request->input('blocked_user_id');
@@ -139,6 +145,7 @@ class ApisController extends Controller
         }
     }
 
+    // View all users on liked list except blocked users
     function viewLikes (Request $request) {
         $liker_id = $request->input('user_id');
 
@@ -163,6 +170,7 @@ class ApisController extends Controller
         ]);  
     }
 
+    // View all users where the logged in user sent to or received messages from, except blocked users
     function viewChatUsers(Request $request) {
         $user_id = $request->input('user_id');
 
@@ -185,8 +193,7 @@ class ApisController extends Controller
             ->where('blocked_user_id',$user_id);
         })
         ->get();
-
-
+        
         $usersReceived = User::select('users.id','users.name','users.profile_url')
         ->distinct()
         ->join('chats', 'users.id', '=', 'chats.sender_user_id')
@@ -215,6 +222,7 @@ class ApisController extends Controller
         ]);  
     }
 
+    // View chat messages with selected user
     function viewChaT(Request $request) {
         $user_id = $request->input('user_id');
         $chatter_id = $request->input('chatter_id');
@@ -236,6 +244,7 @@ class ApisController extends Controller
         ]);  
     }
 
+    // Send a message to selected user
     function sendMessage(Request $request) {
         $date = date('Y-m-d h:i:s');
         $sender = $request->input('user_id');
@@ -254,6 +263,7 @@ class ApisController extends Controller
         }
     }
 
+    // Update profile info
     function settings(Request $request) {
         $id = $request->input('id');
         $newName = $request->input('name');
