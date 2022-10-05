@@ -16,22 +16,22 @@ loginLink.addEventListener('click', () => {
 	window.location.href = 'login.html';
 });
 
-function getLocation() {
+const getLocation = async () => {
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(savePosition);
 	} else {
 		x.innerHTML = 'Geolocation is not supported by this browser.';
 	}
-}
+};
 
 function savePosition(position) {
 	latitudeVal = position.coords.latitude;
 	longitudeVal = position.coords.longitude;
+	register();
 }
 
 // Register
 const register = async () => {
-	getLocation();
 	const form = {
 		name: username.value,
 		email: email.value,
@@ -50,4 +50,4 @@ const register = async () => {
 	}
 };
 
-signupPageButton.addEventListener('click', register);
+signupPageButton.addEventListener('click', getLocation);
