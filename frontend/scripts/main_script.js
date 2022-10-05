@@ -42,6 +42,11 @@ const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
 let currentUser;
 
+const profileImageInput = document.getElementById('profileImageInput');
+const submitImg = document.getElementById('submitImg');
+const profilePic = document.getElementById('profilePic');
+let base64String = '';
+
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
 // Default values in account settings
@@ -438,3 +443,16 @@ const message = (id) => {
 	navLiked.classList.remove('current');
 	navHome.classList.remove('current');
 };
+
+function imageUploaded() {
+	const file = document.querySelector('input[type=file]')['files'][0];
+
+	const reader = new FileReader();
+
+	reader.onload = function() {
+		base64String = reader.result;
+	};
+	reader.readAsDataURL(file);
+}
+
+submitImg.addEventListener('click', uploadImage);
