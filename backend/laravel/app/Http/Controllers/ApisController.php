@@ -26,6 +26,11 @@ class ApisController extends Controller
             ->from('blocks')
             ->where('blocked_user_id',$id);
         })
+        ->whereNotIn('id', function($private) {
+            $private->select('id')
+            ->from('users')
+            ->where('private_account', '=', 'Yes');
+        })
         ->get();
 
         return response()->json([
@@ -50,6 +55,11 @@ class ApisController extends Controller
             $blockedBy->select("blocking_user_id")
             ->from('blocks')
             ->where('blocked_user_id',$id);
+        })
+        ->whereNotIn('id', function($private) {
+            $private->select('id')
+            ->from('users')
+            ->where('private_account', '=', 'Yes');
         })
         ->get();
 
