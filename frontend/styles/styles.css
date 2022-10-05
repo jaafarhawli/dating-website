@@ -906,6 +906,17 @@ ul {
 	.hero-pic {
 		display: none;
 	}
+
+	.chat-hamburger {
+		display: block !important;
+		color: white;
+	}
+	.user-chat-element {
+		display: none;
+	}
+	.chat-users {
+		width: 60px !important;
+	}
 }
 
 @media screen and (max-width: 700px) {
@@ -940,10 +951,6 @@ ul {
 		align-self: center;
 	}
 
-	/* .main-navbar {
-		align-items: center;
-	} */
-
 	.hamburger {
 		display: block !important;
 		color: black;
@@ -969,4 +976,16 @@ ul {
 	flex-direction: column-reverse;
 	align-items: flex-end;
 	gap: 10px;
+}
+
+.user-chat-element.active {
+	display: flex;
+}
+
+.chat-users.active {
+	width: 50% !important;
+}
+
+.main-chat.active {
+	display: none;
 }

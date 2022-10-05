@@ -58,6 +58,10 @@ const navItems = document.querySelector('.nav-elements');
 const mainHeroHeader = document.querySelector('.main-hero-header');
 const mainNav = document.querySelector('.main-navbar');
 
+const chatHamburger = document.querySelector('.chat-hamburger');
+const chatUser = document.querySelectorAll('.user-chat-element');
+const mainChat = document.querySelector('.main-chat');
+
 const baseURL = 'http://127.0.0.1:8000/api/v1';
 
 // Default values in account settings
@@ -534,4 +538,10 @@ hamburger.addEventListener('click', () => {
 	navItems.classList.toggle('active');
 	mainNav.classList.toggle('active');
 	mainHeroHeader.classList.toggle('active');
+});
+
+chatHamburger.addEventListener('click', () => {
+	chatUser.forEach((user) => user.classList.toggle('active'));
+	usersBlock.classList.toggle('active');
+	mainChat.classList.toggle('active');
 });
