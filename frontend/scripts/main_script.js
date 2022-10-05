@@ -46,6 +46,7 @@ const profileImageInput = document.getElementById('profileImageInput');
 const submitImg = document.getElementById('submitImg');
 const profilePic = document.getElementById('profilePic');
 let base64String = '';
+let imageChanged = false;
 
 const baseURL = 'http://127.0.0.1:8000/api/v0.1';
 
@@ -314,6 +315,10 @@ const settings = async () => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		if (imageChanged == true) {
+			uploadImage();
+			imageChanged = false;
+		}
 		localStorage.setItem('name', accountName.value);
 		localStorage.setItem('email', accountEmail.value);
 		localStorage.setItem('password', accountPassword.value);
@@ -321,7 +326,7 @@ const settings = async () => {
 		localStorage.setItem('bio', accountBio.value);
 		localStorage.setItem('private_account', accountPrivate.value);
 
-		window.location.reload();
+		// window.location.reload();
 	} catch (error) {
 		console.log(error);
 	}
@@ -453,9 +458,11 @@ function imageUploaded() {
 		base64String = reader.result;
 	};
 	reader.readAsDataURL(file);
+	imageChanged = true;
 }
 
 const uploadImage = async () => {
+	console.log('hi');
 	let form = {
 		profilePicture: base64String,
 		id: localStorage.id
@@ -469,4 +476,3 @@ const uploadImage = async () => {
 };
 
 profileImageInput.addEventListener('change', imageUploaded);
-submitImg.addEventListener('click', uploadImage);
