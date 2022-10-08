@@ -12,7 +12,7 @@ class ApisController extends Controller
 {   
     // Show all users that that have the prefered gender of the logged in user and aren't blocking/blocked by him and are not private
     function showAll(Request $request) {
-        $prefered = $request->input('preferedGender');
+        $prefered = $request->preferedGender;
         $id = $request->input('id');
 
         $users = User::where(["gender" => $prefered])
@@ -48,9 +48,8 @@ class ApisController extends Controller
     // Return user info from user id to display in user modal
     function showUser(Request $id) {
         $user_id = $id->input('id');
-        $data = User::select("id","name","location","gender","prefered_gender","bio","profile_url")
-        ->where("id", $user_id)
-        ->get();
+        $data = User::where("id", $user_id)
+        ->get(["id","name","location","gender","prefered_gender","bio","profile_url","longitude","latitude"]);
 
         return response()->json([
             "status" => "Success",

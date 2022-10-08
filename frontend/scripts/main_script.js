@@ -59,8 +59,9 @@ const mainHeroHeader = document.querySelector('.main-hero-header');
 const mainNav = document.querySelector('.main-navbar');
 
 const chatHamburger = document.querySelector('.chat-hamburger');
-const chatUser = document.querySelectorAll('.user-chat-element');
+
 const mainChat = document.querySelector('.main-chat');
+const chatHam = document.getElementById('chatHamburger');
 
 const baseURL = 'http://127.0.0.1:8000/api/v1';
 
@@ -80,6 +81,19 @@ window.onload = () => {
 	likedUsers();
 	viewChatUsers();
 };
+
+function chatMenu() {
+	const chatUser = document.querySelectorAll('.user-chat-element');
+	chatUser.forEach((user) => user.classList.toggle('active'));
+	chatUsers.classList.toggle('active');
+	mainChat.classList.toggle('active');
+}
+
+// chatHamburger.addEventListener('click', () => {
+// 	chatUser.forEach((user) => user.classList.toggle('active'));
+// 	chatUsers.classList.toggle('active');
+// 	mainChat.classList.toggle('active');
+// });
 
 // Switch between pages
 // Home navbar element
@@ -246,6 +260,7 @@ const showUser = async (userId) => {
 				Authorization: `bearer ${localStorage.token}`
 			}
 		});
+		console.log(userInfo.data.data[0]);
 		userModalInfo.innerHTML = `
 				<img src="${userInfo.data.data[0].profile_url}" alt="user image" class="user-modal-image">
 				<div class="user-details">
@@ -538,10 +553,4 @@ hamburger.addEventListener('click', () => {
 	navItems.classList.toggle('active');
 	mainNav.classList.toggle('active');
 	mainHeroHeader.classList.toggle('active');
-});
-
-chatHamburger.addEventListener('click', () => {
-	chatUser.forEach((user) => user.classList.toggle('active'));
-	usersBlock.classList.toggle('active');
-	mainChat.classList.toggle('active');
 });
